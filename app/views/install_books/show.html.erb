@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cust inf:</b>
+  <%= @install_book.cust_inf_id %>
+</p>
+
+<p>
+  <b>Custid:</b>
+  <%= @install_book.CustId %>
+</p>
+
+<p>
+  <b>Gsk no:</b>
+  <%= @install_book.GSK_No %>
+</p>
+
+<p>
+  <b>Gsk pin:</b>
+  <%= @install_book.GSK_Pin %>
+</p>
+
+<p>
+  <b>Rcv no:</b>
+  <%= @install_book.RCV_No %>
+</p>
+
+<p>
+  <b>Rcv pin:</b>
+  <%= @install_book.RCV_Pin %>
+</p>
+
+
+<%= link_to 'Edit', edit_install_book_path(@install_book) %> |
+<%= link_to 'Back', install_books_path %>

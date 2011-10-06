@@ -1,0 +1,35 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  CustId: 1
+  Trans_id: 1
+  Slip_No: MyString
+  CName: MyString
+  Contact_No: MyString
+  Alt_Con_No: MyString
+  Address: MyString
+  State: MyString
+  City: MyString
+  PinCode: 1
+  Date_of_reg: 2011-10-05
+  Amount: 
+  SmartcardNo: MyString
+  Installed: false
+  Remarks: MyString
+
+two:
+  CustId: 1
+  Trans_id: 1
+  Slip_No: MyString
+  CName: MyString
+  Contact_No: MyString
+  Alt_Con_No: MyString
+  Address: MyString
+  State: MyString
+  City: MyString
+  PinCode: 1
+  Date_of_reg: 2011-10-05
+  Amount: 
+  SmartcardNo: MyString
+  Installed: false
+  Remarks: MyString

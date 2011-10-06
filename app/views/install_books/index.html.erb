@@ -1,0 +1,33 @@
+<h1>Listing install_books</h1>
+
+<table>
+  <tr>
+    <th>Cust inf</th>
+    <th>Custid</th>
+    <th>Gsk no</th>
+    <th>Gsk pin</th>
+    <th>Rcv no</th>
+    <th>Rcv pin</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @install_books.each do |install_book| %>
+  <tr>
+    <td><%= install_book.cust_inf_id %></td>
+    <td><%= install_book.CustId %></td>
+    <td><%= install_book.GSK_No %></td>
+    <td><%= install_book.GSK_Pin %></td>
+    <td><%= install_book.RCV_No %></td>
+    <td><%= install_book.RCV_Pin %></td>
+    <td><%= link_to 'Show', install_book %></td>
+    <td><%= link_to 'Edit', edit_install_book_path(install_book) %></td>
+    <td><%= link_to 'Destroy', install_book, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Install book', new_install_book_path %>

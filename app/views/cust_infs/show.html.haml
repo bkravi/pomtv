@@ -1,0 +1,62 @@
+%p
+  %b Custid:
+    = @cust_inf.CustId
+
+%p
+  %b Trans:
+    = @cust_inf.Trans_id
+
+%p
+  %b Slip no:
+    = @cust_inf.Slip_No
+
+%p
+  %b Cname:
+    = @cust_inf.CName
+
+%p
+  %b Contact no:
+    = @cust_inf.Contact_No
+
+%p
+  %b Alt con no:
+    = @cust_inf.Alt_Con_No
+
+%p
+  %b Address:
+    = @cust_inf.Address
+
+%p
+  %b State:
+    = @cust_inf.State
+
+%p
+  %b City:
+    = @cust_inf.City
+
+%p
+  %b Pincode:
+    = @cust_inf.PinCode
+
+%p
+  %b Date of reg:
+    = @cust_inf.Date_of_reg
+
+%p
+  %b Amount:
+    = @cust_inf.Amount
+
+%p
+  %b Smartcardno:
+    = @cust_inf.SmartcardNo
+
+%p
+  %b Installed:
+    = @cust_inf.Installed
+
+%p
+  %b Remarks:
+    = @cust_inf.Remarks
+
+= link_to 'Edit', edit_cust_inf_path(@cust_inf)
+= link_to 'Back', cust_infs_path

@@ -1,0 +1,20 @@
+var state_city_array = new Array();
+
+<% for s_c in @state_city_list -%>
+  state_city_array.push(new Array('<%= s_c.State %>','<%= s_c.City %>'))
+<% end -%>
+
+function getCities() {
+  state = $("#cust_inf_State").attr("value");
+  $("#cust_inf_City").html("");
+  $(state_city_array).each(function(i) {
+    if (state_city_array[i][0] == state) {
+      $("#cust_inf_City").append("<option value='" + state_city_array[i][1] + "'>" + state_city_array[i][1] + "</option>")
+    }
+  });
+}
+
+jQuery(document).ready(function(){
+  getCities();
+  $("#cust_inf_State").change(getCities);
+});

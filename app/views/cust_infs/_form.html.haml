@@ -1,0 +1,102 @@
+= javascript_include_tag 'cust_infs'
+%div{:class=>"mid_bg_add"}
+  = form_for(@cust_inf) do |f|
+    = render "shared/error_messages", :target => @cust_inf
+    %table{:cellpadding=>"3", :cellspacing=>"3", :style => "margin-left:10px;margin-top:10px"}
+      %tbody{:class => 'bold'}
+        - if ! flash[:notice].nil?
+          %tr
+            %td{:colspan => 4, :style => "color:green;font-weight:bold;font-size:13px", :align => "center"}
+              %b= flash[:notice] 
+        %tr
+          %td{:colspan => 4, :class => 'note'}
+            ** All fields are mandatory
+        %tr
+          %td{:colspan => 4}
+            %h1 Provide Subscriber's Details Here
+            %br
+            %br
+        %tr
+          %td
+            = f.label :Slip_No, 'Payment Slip No**'
+          %td
+            = f.text_field :Slip_No, :class => 'text_feld_area'
+          %td
+            = f.label :Date_of_reg, 'Payment Date**'
+          %td
+            = f.date_select :Date_of_reg, :start_year => 2010, :end_year => Time.now.year, :order => [:day, :month, :year]
+        %tr
+          %td
+            = f.label :Amount, 'Amount Paid**'
+          %td
+            = f.text_field :Amount, :class => 'text_feld_area_small'
+          %td{:colspan => 2}
+        %tr
+          %td{:colspan => 4, :align => "center"}
+            %hr{:style => "height:4px;background-color:#D6D9BA"}
+        %tr
+          %td
+            = f.label :CName, 'Customer Name**'
+          %td
+            = f.text_field :CName, :class => 'text_feld_area'
+          %td
+            = f.label :Contact_No, 'Contact No**'
+          %td
+            = f.text_field :Contact_No, :class => 'text_feld_area'
+        %tr
+          %td
+            = f.label :Alt_Con_No, 'Alternate Contact No'
+          %td
+            = f.text_field :Alt_Con_No, :class => 'text_feld_area'
+          %td
+            = f.label :Address, 'Address**'
+          %td
+            = f.text_area :Address, :size=> "26x2", :class => 'write_area'
+        %tr
+          %td
+            = f.label :State, 'State**'
+          - if @controller.action_name == 'edit'
+            %td
+              = f.text_field :State, :class => 'text_feld_area', :disabled => true
+          - else
+            %td
+              = select :cust_inf, :State, @state_list
+          %td
+            = f.label :City, 'City**'
+          - if @controller.action_name == 'edit'
+            %td
+              = f.text_field :City, :class => 'text_feld_area', :disabled => true
+          - else
+            %td
+              = select :cust_inf, :City, @city_list
+        %tr
+          %td
+            = f.label :PinCode, 'Pincode**'
+          %td
+            = f.text_field :PinCode, :class => 'text_feld_area_small'
+          %td{:colspan => 2} 
+        %tr
+          %td{:colspan => 4, :align => "center"}
+            %hr{:style => "height:4px;background-color:#D6D9BA"}
+        %tr
+          %td
+            = f.label :SmartcardNo, 'Smart Card No**'
+          %td
+            = f.text_field :SmartcardNo, :class => 'text_feld_area'
+          %td
+            = f.label :Remarks, 'Remarks'
+          %td
+            = f.text_area :Remarks, :size=> "26x2", :class => 'write_area'
+        %tr
+          %td
+            = f.label :Installed, 'Installed ?'
+          %td
+            = f.check_box :Installed
+          %td{:colspan => 2}
+        %tr
+          %td{:colspan => 3, :align => "right"}
+            = f.submit ' Save and Exit ', :name => "save", :title => "Save and go back to main page"
+            &nbsp;
+            = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue to register another customer"
+          %td{:colspan => "1",:align=>"left"}
+            = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel registering customer"

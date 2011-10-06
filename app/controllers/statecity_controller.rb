@@ -1,0 +1,2 @@
+class StatecityController < ApplicationController
+end

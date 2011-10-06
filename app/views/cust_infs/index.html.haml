@@ -1,0 +1,62 @@
+%div{:class=>"mid_bg_add_bigger"}
+  %table{:border => 0}
+    - if ! flash[:notice].nil?
+      %tr
+        %td{:colspan => 16, :style => "color:green;font-weight:bold;font-size:13px", :align => "center"}
+          %b= flash[:notice] 
+    %tr
+      %td{:colspan => 8}
+        %h1 Customers Details
+      %td{:colspan => 8, :align => "right"}
+        .new_page_link
+          = link_to ' Add New Customer ', new_cust_inf_path
+    %tr{:style => "font-weight:bold;background-color: blue;color:white"}
+      %td Id
+      %td{:style => "white-space: nowrap;"} Slip No
+      %td{:width => "100px"} Name
+      %td Contact#
+      %td Alt Cont#
+      %td{:width => "200px"} Address
+      %td State
+      %td City
+      %td Pincode
+      %td{:style => "white-space: nowrap;"} Reg Date
+      %td Amount
+      %td{:style => "white-space: nowrap;"} SCN
+      %td Installed
+      %td{:width => "130px"} Remarks
+      %td{:colspan => 2, :align => "center"} Action
+    - @cust_infs.each do |cust_inf|
+      %tr{:class => cycle('list_line_odd','list_line_even')}
+        %td
+          = cust_inf.CustId
+        %td{:style => "white-space: nowrap;"}
+          = cust_inf.Slip_No 
+        %td
+          = cust_inf.CName 
+        %td
+          = cust_inf.Contact_No 
+        %td
+          = (cust_inf.Alt_Con_No.nil? || cust_inf.Alt_Con_No.blank?) ?  "N/A" : cust_inf.Alt_Con_No
+        %td
+          = cust_inf.Address 
+        %td
+          = cust_inf.State 
+        %td
+          = cust_inf.City 
+        %td
+          = cust_inf.PinCode 
+        %td{:style => "white-space: nowrap;"}
+          = cust_inf.Date_of_reg.strftime('%d-%b-%y') 
+        %td
+          = cust_inf.Amount.to_i 
+        %td{:style => "white-space: nowrap;"}
+          = cust_inf.SmartcardNo 
+        %td
+          = cust_inf.Installed == true ? "Yes" : "No" 
+        %td
+          = (cust_inf.Remarks.nil? || cust_inf.Remarks.blank?) ?  "N/A" : cust_inf.Remarks
+        %td{:align => "center"}
+          = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.CName}'"), edit_cust_inf_path(cust_inf.id)
+        %td{:align => "center"}
+          = link_to image_tag('delete.png',:title => "Delete '#{cust_inf.CName}'"), cust_inf, :confirm => "Are you sure to delete #{cust_inf.CName}?", :method => :delete
