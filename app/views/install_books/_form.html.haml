@@ -1,0 +1,50 @@
+%div{:class=>"mid_bg_add"}
+  = form_for(@install_book) do |f|
+    = render "shared/error_messages", :target => @install_book
+    %table{:cellpadding=>"3", :cellspacing=>"3", :style => "margin-left:50px;margin-top:10px"}
+      %tbody{:class => 'bold'}
+        - if ! flash[:notice].nil?
+          %tr
+            %td{:colspan => 4, :style => "color:green;font-weight:bold;font-size:13px", :align => "center"}
+              %b= flash[:notice] 
+        %tr
+          %td{:colspan => 4, :class => 'note'}
+            ** All fields are mandatory
+        %tr
+          %td{:colspan => 4}
+            %h1 Booking Details
+            %br
+            %br
+        %tr
+          %td
+            = f.label :GSK_No, 'Booking For**'
+          %td{:colspan => 3, :align => "left"}
+            = select :booking_for_cust, :cust, @booking_for
+        %tr
+          %td{:colspan => 4}
+            %br
+        %tr
+          %td
+            = f.label :GSK_No, 'GSK No**'
+          %td
+            = f.text_field :GSK_No, :class => 'text_feld_area'
+          %td
+            = f.label :GSK_Pin, 'GSK Pin**'
+          %td
+            = f.text_field :GSK_Pin, :class => 'text_feld_area'
+        %tr
+          %td{:colspan => 4, :align => "center"}
+            %hr{:style => "height:4px;background-color:#D6D9BA"}
+        %tr
+          - if @controller.action_name == 'edit' || @controller.action_name == 'update'
+            %td{:colspan => 2, :align => "right"}
+              = f.submit ' Update ', :name => "save", :title => "Update and go back to main page"
+            %td{:colspan => "2",:align=>"left"}
+              = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel this booking"
+          - else  
+            %td{:colspan => 3, :align => "right"}
+              = f.submit ' Save and Exit ', :name => "save", :title => "Save and go back to main page"
+              &nbsp;
+              = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue for another booking"
+            %td{:colspan => "1",:align=>"left"}
+              = link_to button_to(' Cancel '), install_books_path, :method => "get", :title => "Cancel this booking"

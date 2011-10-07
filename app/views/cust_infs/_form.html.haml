@@ -18,19 +18,24 @@
             %br
         %tr
           %td
-            = f.label :Slip_No, 'Payment Slip No**'
+            = f.label :Slip_No, 'Payment Slip No'
           %td
             = f.text_field :Slip_No, :class => 'text_feld_area'
+          %td
+            %u OR
+            = f.label :Trans_id, ' Transaction ID'
+          %td
+            = f.text_field :Trans_id, :class => 'text_feld_area'
+        %tr
           %td
             = f.label :Date_of_reg, 'Payment Date**'
           %td
             = f.date_select :Date_of_reg, :start_year => 2010, :end_year => Time.now.year, :order => [:day, :month, :year]
-        %tr
           %td
             = f.label :Amount, 'Amount Paid**'
           %td
             = f.text_field :Amount, :class => 'text_feld_area_small'
-          %td{:colspan => 2}
+            Rs.
         %tr
           %td{:colspan => 4, :align => "center"}
             %hr{:style => "height:4px;background-color:#D6D9BA"}
@@ -55,7 +60,7 @@
         %tr
           %td
             = f.label :State, 'State**'
-          - if @controller.action_name == 'edit'
+          - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td
               = f.text_field :State, :class => 'text_feld_area', :disabled => true
           - else
@@ -63,7 +68,7 @@
               = select :cust_inf, :State, @state_list
           %td
             = f.label :City, 'City**'
-          - if @controller.action_name == 'edit'
+          - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td
               = f.text_field :City, :class => 'text_feld_area', :disabled => true
           - else
@@ -76,27 +81,15 @@
             = f.text_field :PinCode, :class => 'text_feld_area_small'
           %td{:colspan => 2} 
         %tr
-          %td{:colspan => 4, :align => "center"}
-            %hr{:style => "height:4px;background-color:#D6D9BA"}
-        %tr
-          %td
-            = f.label :SmartcardNo, 'Smart Card No**'
-          %td
-            = f.text_field :SmartcardNo, :class => 'text_feld_area'
-          %td
-            = f.label :Remarks, 'Remarks'
-          %td
-            = f.text_area :Remarks, :size=> "26x2", :class => 'write_area'
-        %tr
-          %td
-            = f.label :Installed, 'Installed ?'
-          %td
-            = f.check_box :Installed
-          %td{:colspan => 2}
-        %tr
-          %td{:colspan => 3, :align => "right"}
-            = f.submit ' Save and Exit ', :name => "save", :title => "Save and go back to main page"
-            &nbsp;
-            = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue to register another customer"
-          %td{:colspan => "1",:align=>"left"}
-            = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel registering customer"
+          - if @controller.action_name == 'edit' || @controller.action_name == 'update'
+            %td{:colspan => 2, :align => "right"}
+              = f.submit ' Update ', :name => "save", :title => "Update and go back to main page"
+            %td{:colspan => "2",:align=>"left"}
+              = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel registering customer"
+          - else  
+            %td{:colspan => 3, :align => "right"}
+              = f.submit ' Save and Exit ', :name => "save", :title => "Save and go back to main page"
+              &nbsp;
+              = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue to register another customer"
+            %td{:colspan => "1",:align=>"left"}
+              = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel registering customer"

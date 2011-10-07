@@ -10,11 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111004194412) do
+ActiveRecord::Schema.define(:version => 20111007023217) do
 
   create_table "cust_infs", :force => true do |t|
     t.integer  "CustId"
-    t.integer  "Trans_id"
+    t.string   "Trans_id"
     t.string   "Slip_No"
     t.string   "CName"
     t.string   "Contact_No"
@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(:version => 20111004194412) do
     t.integer  "RCV_Pin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "Slip_Trans_id"
+    t.string   "SmartcardNo"
+    t.boolean  "Installed"
+    t.string   "Remarks"
   end
 
   create_table "statecity", :force => true do |t|

@@ -1,6 +1,6 @@
 #navigation {
 	left: 20px;
-	top: 190px;
+	top: 160px;
 	/*z-index: 200;*/
 	position: absolute;
 	font-size: 16px;	
@@ -58,11 +58,11 @@ ul.navigation li {
 	color: #ffffff;background-color:#3163CE;text-decoration:none;font-size:18px
 }
 .navigation a:hover{color:red}
-.marginlttp{position:absolute;left:300px;top: 50px;padding-bottom:100px;}
-.hrule{background-color:white;padding-top:150px;border:grey 2px solid; border-radius: 15px;height:70px}
+.marginlttp{position:absolute;left:300px;top: 20px;padding-bottom:100px;}
+.hrule{background-color:white;padding-top:150px;border:grey 2px solid; border-radius: 15px;height:40px}
 #contentBodynew {
 	position:absolute;
-	top:250px;
+	top:220px;
 }
 
 #errorExplanation {
@@ -109,6 +109,7 @@ ul.navigation li {
 .bold{font-weight:bold;font-family: Arial, sans-serif;}
 .mid_bg_add{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 250px;width: 800px;}
 .mid_bg_add_bigger{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 5px;width: "100%";}
+.mid_bg_add_booking{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:200px;width: "100%";}
 .note{color:red;font-size:12px;font-style:italic;}
 table tr.list_line_odd {background-color: #CCCCFF;}
 table tr.list_line_even {background-color: #9999FF;}

@@ -12,7 +12,7 @@
           = link_to ' Add New Customer ', new_cust_inf_path
     %tr{:style => "font-weight:bold;background-color: blue;color:white"}
       %td Id
-      %td{:style => "white-space: nowrap;"} Slip No
+      %td{:style => "white-space: nowrap;"} Slip/Trans No
       %td{:width => "100px"} Name
       %td Contact#
       %td Alt Cont#
@@ -31,7 +31,7 @@
         %td
           = cust_inf.CustId
         %td{:style => "white-space: nowrap;"}
-          = cust_inf.Slip_No 
+          = cust_inf.Slip_No || cust_inf.Trans_id
         %td
           = cust_inf.CName 
         %td
@@ -51,7 +51,7 @@
         %td
           = cust_inf.Amount.to_i 
         %td{:style => "white-space: nowrap;"}
-          = cust_inf.SmartcardNo 
+          = (cust_inf.SmartcardNo.nil? || cust_inf.SmartcardNo.blank?) ?  "N/A" : cust_inf.SmartcardNo
         %td
           = cust_inf.Installed == true ? "Yes" : "No" 
         %td

@@ -36,23 +36,30 @@ class CustInfsController < ApplicationController
   # POST /cust_infs
   def create
     @cust_inf = CustInf.new(params[:cust_inf])
+    @cust_inf.CName.capitalize!
     @states = CustInf.find_by_sql("select distinct State from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
     @state_list = [""]
     @city_list = [""]
     @states.length.times do |index|
       @state_list << @states[index].State
     end
-    if @cust_inf.save
-      @cust_inf.update_attribute(:CustId, @cust_inf.id)
-      @cust_inf.update_attribute(:Trans_id, @cust_inf.id)
-      flash[:notice] = 'Customer was successfully created'
-      if params[:save]
-        redirect_to cust_infs_path
-      else
-        redirect_to new_cust_inf_path
-      end
-    else
+    params[:cust_inf][:Slip_No]=nil if params[:cust_inf][:Slip_No].blank? || params[:cust_inf][:Slip_No].nil?
+    params[:cust_inf][:Trans_id]=nil if params[:cust_inf][:Trans_id].blank? || params[:cust_inf][:Trans_id].nil?
+    if (((params[:cust_inf][:Slip_No].blank? || params[:cust_inf][:Slip_No].nil?) && (params[:cust_inf][:Trans_id].blank? || params[:cust_inf][:Trans_id].nil?)) || ((! params[:cust_inf][:Slip_No].nil?) && (! params[:cust_inf][:Trans_id].nil?)))
+      flash[:notice] = "#ERROR#Please provide either Slip No. or Transaction ID"
       render :action => "new"
+    else
+      if @cust_inf.save
+        @cust_inf.update_attribute(:CustId, @cust_inf.id)
+        flash[:notice] = 'Customer was successfully created'
+        if params[:save]
+          redirect_to cust_infs_path
+        else
+          redirect_to new_cust_inf_path
+        end
+      else
+        render :action => "new"
+      end
     end
   end
 
@@ -65,11 +72,19 @@ class CustInfsController < ApplicationController
     @states.length.times do |index|
       @state_list << @states[index].State
     end
-    if @cust_inf.update_attributes(params[:cust_inf])
-      flash[:notice] = "Customer was successfully updated"
-      redirect_to cust_infs_path
-    else
+    params[:cust_inf][:CName].capitalize! if (! params[:cust_inf][:CName].nil?)
+    params[:cust_inf][:Slip_No]=nil if params[:cust_inf][:Slip_No].blank? || params[:cust_inf][:Slip_No].nil?
+    params[:cust_inf][:Trans_id]=nil if params[:cust_inf][:Trans_id].blank? || params[:cust_inf][:Trans_id].nil?
+    if (((params[:cust_inf][:Slip_No].blank? || params[:cust_inf][:Slip_No].nil?) && (params[:cust_inf][:Trans_id].blank? || params[:cust_inf][:Trans_id].nil?)) || ((! params[:cust_inf][:Slip_No].nil?) && (! params[:cust_inf][:Trans_id].nil?)))
+      flash[:notice] = "#ERROR#Please provide either Slip No. or Transaction ID"
       render :action => "edit"
+    else
+      if @cust_inf.update_attributes(params[:cust_inf])
+        flash[:notice] = "Customer was successfully updated"
+        redirect_to cust_infs_path
+      else
+        render :action => "edit"
+      end
     end
   end
 
