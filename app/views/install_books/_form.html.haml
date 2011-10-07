@@ -12,12 +12,12 @@
             ** All fields are mandatory
         %tr
           %td{:colspan => 4}
-            %h1 Booking Details
+            %h1 Workorder Details
             %br
             %br
         %tr
           %td
-            = f.label :GSK_No, 'Booking For**'
+            = f.label :GSK_No, 'Workorder For**'
           %td{:colspan => 3, :align => "left"}
             = select :booking_for_cust, :cust, @booking_for
         %tr
@@ -27,24 +27,18 @@
           %td
             = f.label :GSK_No, 'GSK No**'
           %td
-            = f.text_field :GSK_No, :class => 'text_feld_area'
+            = f.text_field :GSK_No, :class => 'text_feld_area', :disabled => @booking_for[0]=="****No customer found to book****"
           %td
             = f.label :GSK_Pin, 'GSK Pin**'
           %td
-            = f.text_field :GSK_Pin, :class => 'text_feld_area'
+            = f.text_field :GSK_Pin, :class => 'text_feld_area', :disabled => @booking_for[0]=="****No customer found to book****"
         %tr
           %td{:colspan => 4, :align => "center"}
             %hr{:style => "height:4px;background-color:#D6D9BA"}
         %tr
-          - if @controller.action_name == 'edit' || @controller.action_name == 'update'
-            %td{:colspan => 2, :align => "right"}
-              = f.submit ' Update ', :name => "save", :title => "Update and go back to main page"
-            %td{:colspan => "2",:align=>"left"}
-              = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel this booking"
-          - else  
-            %td{:colspan => 3, :align => "right"}
-              = f.submit ' Save and Exit ', :name => "save", :title => "Save and go back to main page"
-              &nbsp;
-              = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue for another booking"
-            %td{:colspan => "1",:align=>"left"}
-              = link_to button_to(' Cancel '), install_books_path, :method => "get", :title => "Cancel this booking"
+          %td{:colspan => 3, :align => "right"}
+            = f.submit ' Save and Exit ', :name => "save", :title => "Save and go back to main page", :disabled => @booking_for[0]=="****No customer found to book****"
+            &nbsp;
+            = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue for another booking", :disabled => @booking_for[0]=="****No customer found to book****"
+          %td{:colspan => "1",:align=>"left"}
+            = link_to button_to(' Cancel '), install_books_path, :method => "get", :title => "Cancel this booking"

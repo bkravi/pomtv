@@ -9,7 +9,7 @@
         %h1 Booking Details
       %td{:colspan => 8, :align => "right"}
         .new_page_link
-          = link_to ' Add New Booking ', new_install_book_path
+          = link_to ' Generate New Workorder ', new_install_book_path
     %tr{:style => "font-weight:bold;background-color: blue;color:white"}
       %td Cust ID
       %td{:style => "white-space: nowrap;"} Name
@@ -17,7 +17,7 @@
       %td City
       %td{:style => "white-space: nowrap;"} Slip/Trans ID
       %td{:style => "white-space: nowrap;"} GSK No
-      %td{:style => "white-space: nowrap;"} GSk PIN
+      %td{:style => "white-space: nowrap;"} GSK PIN
       %td{:style => "white-space: nowrap;"} SmartCardNo
       %td{:style => "white-space: nowrap;"} RCV No
       %td{:style => "white-space: nowrap;"} RCV PIN
@@ -51,9 +51,9 @@
           = (install_book.Remarks.nil? || install_book.Remarks.blank?) ?  "N/A" : install_book.Remarks
         %td{:align => "center"}
           - if install_book.RCV_No.nil?
-            = link_to image_tag('reliance_recharge.png',:title => 'Click to provide recharge voucher'), install_books_path
+            = link_to image_tag('reliance_recharge.png',:title => 'Click to provide recharge voucher to customer'), edit_install_book_path(install_book.id)
           - else
-            = image_tag('reliance_recharge_disable.png', :title => 'Recharge voucher already sent to the customer')
+            = image_tag('reliance_recharge_disable.png', :title => 'Recharge voucher already sent to customer')
 
 
 

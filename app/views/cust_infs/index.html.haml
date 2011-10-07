@@ -53,10 +53,14 @@
         %td{:style => "white-space: nowrap;"}
           = (cust_inf.SmartcardNo.nil? || cust_inf.SmartcardNo.blank?) ?  "N/A" : cust_inf.SmartcardNo
         %td
-          = cust_inf.Installed == true ? "Yes" : "No" 
+          = cust_inf.Installed == true ? "YES" : "NO" 
         %td
           = (cust_inf.Remarks.nil? || cust_inf.Remarks.blank?) ?  "N/A" : cust_inf.Remarks
-        %td{:align => "center"}
-          = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.CName}'"), edit_cust_inf_path(cust_inf.id)
+        - if ! cust_inf.Installed
+          %td{:align => "center"}
+            = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.CName}'"), edit_cust_inf_path(cust_inf.id)
+        - else
+          %td{:align => "center"}
+            = image_tag('edit_disable.png',:title => "Installation already done so no edit allow !!")
         %td{:align => "center"}
           = link_to image_tag('delete.png',:title => "Delete '#{cust_inf.CName}'"), cust_inf, :confirm => "Are you sure to delete #{cust_inf.CName}?", :method => :delete

@@ -83,7 +83,7 @@
         %tr
           - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td{:colspan => 2, :align => "right"}
-              = f.submit ' Update ', :name => "save", :title => "Update and go back to main page"
+              = f.submit ' Update ', :title => "Update and go back to main page"
             %td{:colspan => "2",:align=>"left"}
               = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel registering customer"
           - else  

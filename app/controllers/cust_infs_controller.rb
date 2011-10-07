@@ -91,6 +91,11 @@ class CustInfsController < ApplicationController
   # DELETE /cust_infs/1
   def destroy
     @cust_inf = CustInf.find(params[:id])
+    slip_or_trans_id = @cust_inf.Slip_No || @cust_inf.Trans_id
+    @install_book = InstallBook.find(:first, :conditions => ["Slip_Trans_id = ?", slip_or_trans_id])
+    if ! @install_book.nil?
+      @install_book.destroy
+    end
     @cust_inf.destroy
     flash[:notice] = 'Customer was successfully deleted'
     redirect_to cust_infs_path

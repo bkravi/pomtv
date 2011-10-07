@@ -1,7 +1,7 @@
 class InstallBooksController < ApplicationController
   # GET /install_books
   def index
-    @install_books = InstallBook.all
+    @install_books = InstallBook.find(:all, :order => "CustId")
   end
 
   # GET /install_books/1
@@ -38,8 +38,12 @@ class InstallBooksController < ApplicationController
         @install_book.update_attribute(:Slip_Trans_id, booking_slip_or_transid)
         @install_book.update_attribute(:cust_inf_id, booking_custid)
         @install_book.update_attribute(:CustId, booking_custid)
-        flash[:notice] = 'Booking successfully created'
-        redirect_to install_books_path
+        flash[:notice] = 'Workorder successfully created'
+        if params[:save]
+          redirect_to install_books_path
+        else
+          redirect_to new_install_book_path
+        end
       else
         render :action => "new"
       end
@@ -49,11 +53,25 @@ class InstallBooksController < ApplicationController
   # PUT /install_books/1
   def update
     @install_book = InstallBook.find(params[:id])
-    if @install_book.update_attributes(params[:install_book])
-      flash[:notice] = 'Booking successfully updated'
-      redirect_to install_books_path
-    else
+    @install_book.SmartcardNo = params[:install_book][:SmartcardNo]
+    @install_book.RCV_No = params[:install_book][:RCV_No]
+    @install_book.RCV_Pin = params[:install_book][:RCV_Pin]
+    @install_book.Remarks = params[:install_book][:Remarks]
+    if params[:install_book][:SmartcardNo].nil? || params[:install_book][:SmartcardNo].blank? || params[:install_book][:RCV_No].nil? || params[:install_book][:RCV_No].blank? || params[:install_book][:RCV_Pin].nil? || params[:install_book][:RCV_Pin].blank?
+      flash[:notice] = "#ERROR#Neither of the Smartcard No, RCV Pin, RCV No can be blank"
       render :action => "edit"
+    else
+      if @install_book.update_attributes(params[:install_book])
+        @install_book.update_attribute(:Installed, 1)
+        cust_inf = CustInf.find(:first, :conditions => ["Slip_No = '#{@install_book.Slip_Trans_id}' or Trans_id = '#{@install_book.Slip_Trans_id}'"])
+        cust_inf.update_attribute(:Installed, 1)
+        cust_inf.update_attribute(:SmartcardNo, @install_book.SmartcardNo)
+        cust_inf.update_attribute(:Remarks, @install_book.Remarks)
+        flash[:notice] = 'Recharge voucher successfully updated'
+        redirect_to install_books_path
+      else
+        render :action => "edit"
+      end
     end
   end
 

@@ -13,6 +13,6 @@ class InstallBook < ActiveRecord::Base
     self.Installed = (self.Installed.nil? || self.Installed.blank?) ? 0 : self.Installed
   end
 
-  validates :GSK_No, :presence => true, :length => 1..11, :numericality => true
-  validates :GSK_Pin, :presence => true, :length => 1..11, :numericality => true
+  validates :GSK_No, :presence => true, :length => 1..18, :numericality => true
+  validates :GSK_Pin, :presence => true, :length => 1..18, :numericality => true
 end

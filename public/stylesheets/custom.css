@@ -109,7 +109,7 @@ ul.navigation li {
 .bold{font-weight:bold;font-family: Arial, sans-serif;}
 .mid_bg_add{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 250px;width: 800px;}
 .mid_bg_add_bigger{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 5px;width: "100%";}
-.mid_bg_add_booking{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:200px;width: "100%";}
+.mid_bg_add_booking{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:110px;width: "100%";}
 .note{color:red;font-size:12px;font-style:italic;}
 table tr.list_line_odd {background-color: #CCCCFF;}
 table tr.list_line_even {background-color: #9999FF;}
