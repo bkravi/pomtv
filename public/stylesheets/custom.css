@@ -107,7 +107,8 @@ ul.navigation li {
 .bold{font-weight:bold;font-family: Arial, sans-serif;}
 .mid_bg_add{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 250px;width: 800px;}
 .mid_bg_add_bigger{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 5px;width: "100%";}
-.mid_bg_add_booking{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:110px;width: "100%";}
+.mid_bg_add_booking{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:70px;width: "100%";}
+.mid_bg_add_utilities{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:150px;width: "100%";}*/
 .note{color:red;font-size:12px;font-style:italic;}
 table tr.list_line_odd {background-color: #CCCCFF;}
 table tr.list_line_even {background-color: #9999FF;}
@@ -115,3 +116,11 @@ table tr.list_line_even {background-color: #9999FF;}
 .new_page_link a:hover{text-decoration:none;color:#808963;background-color: #FF99FF;font-size:18px;font-weight:bold;}
 .flashNoticeError {background-color: #F7ACBF;color: #E30940;text-align: center;}
 .flashNoticeNoError {background-color: #AAFF7F;color: green;text-align: center;}
+.paginate_ss{font-size:12px;margin-left:2px;margin-top:2px;margin-bottom:2px}
+.paginate_ss a {color: #105CB6;text-decoration: none;border: 1px solid #9AAFE5;background-color:#CCFFCC;}
+.paginate_ss a:hover, .paginate_ss a:focus {color: red;border-color: red}
+.paginate_ss em.current{text-decoration: none;border: 1px solid #064B70;background-color:#33FF33;font-style:normal;}
+.row_hover tr.datarow:hover{background-color: #ABDD91;opacity: .8;}
+.mid_bg_add_utilities tr.datarow a{font-size:17px; color:black; font-weight:bold;text-decoration:none;}
+.mid_bg_add_utilities tr.datarow a:hover, .mid_bg_add_utilities tr.datarow a:focus{color:yellow; background-color:black}
+

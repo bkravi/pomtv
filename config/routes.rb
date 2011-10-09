@@ -3,11 +3,15 @@ Pomtv::Application.routes.draw do
 
   resources :cust_infs
 
-  resources :utilities
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   get 'javascripts/cust_infs' => 'javascripts#cust_infs'
+
+  match 'utilities/save_reliance' => 'utilities#save_reliance', :as => :save_reliance
+  match 'utilities/send_to_reliance' => 'utilities#send_to_reliance', :as => :send_to_reliance
+  resources :utilities  # must be after 'match'. So that Rail's RESTful be at a lower priority than the custom path
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

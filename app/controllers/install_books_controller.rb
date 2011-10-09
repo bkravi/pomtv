@@ -1,7 +1,7 @@
 class InstallBooksController < ApplicationController
   # GET /install_books
   def index
-    @install_books = InstallBook.find(:all, :order => "CustId", :conditions => ["delete_flag = 0"])
+    @install_books = InstallBook.find(:all, :order => "CustId", :conditions => ["delete_flag = 0"]).paginate(:page => params[:page], :per_page => 15)
   end
 
   # GET /install_books/1
