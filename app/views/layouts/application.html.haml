@@ -6,9 +6,10 @@
     = javascript_include_tag 'jquery', 'jquery_ujs', 'jquery-ui', 'custom', 'common'
     = csrf_meta_tag
   %body
-    %img.marginlttp{:border => "0", :src => "/images/pomtv_header.png"}/
+    %img.marginlttp{:border => "0", :src => "/images/pomtv_header_1.png", :height => 80}/
     #navigation
       = render_navigation
     %p.hrule
+    %marquee.marque{:scrollamount => 5} Om Shanti Om... I Am A Peaceful Soul...
     #contentBodynew
       = yield

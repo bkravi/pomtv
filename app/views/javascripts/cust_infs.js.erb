@@ -14,7 +14,26 @@ function getCities() {
   });
 }
 
+function resetDateToCurrent() {
+  alert("Payment date can not be a future date !! \nSetting it to Current Date [<%= @curr_day %>/<%= @curr_month %>/<%= @curr_year %>]");
+  $("#cust_inf_Date_of_reg_1i").attr("value", <%= @curr_year %>);
+  $("#cust_inf_Date_of_reg_2i").attr("value", <%= @curr_month %>);
+  $("#cust_inf_Date_of_reg_3i").attr("value", <%= @curr_day %>);
+}
+
+function validateDate() {
+  year = $("#cust_inf_Date_of_reg_1i").attr("value");
+  month = $("#cust_inf_Date_of_reg_2i").attr("value");
+  day = $("#cust_inf_Date_of_reg_3i").attr("value");
+  if ((year >= <%= @curr_year %>) && (month > <%= @curr_month %> || (month == <%= @curr_month %> && day > <%= @curr_day %>))) {
+    resetDateToCurrent()
+  }
+}
+
 jQuery(document).ready(function(){
   getCities();
   $("#cust_inf_State").change(getCities);
+  $("#cust_inf_Date_of_reg_1i").change(validateDate);
+  $("#cust_inf_Date_of_reg_2i").change(validateDate);
+  $("#cust_inf_Date_of_reg_3i").change(validateDate);
 });

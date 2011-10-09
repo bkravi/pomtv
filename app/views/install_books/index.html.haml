@@ -1,9 +1,6 @@
 %div{:class=>"mid_bg_add_booking"}
+  = render "shared/flash_messages"
   %table{:border => 0}
-    - if ! flash[:notice].nil?
-      %tr
-        %td{:colspan => 13, :style => "color:green;font-weight:bold;font-size:13px", :align => "center"}
-          %b= flash[:notice] 
     %tr
       %td{:colspan => 5}
         %h1 Booking Details

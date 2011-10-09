@@ -1,7 +1,7 @@
 class CustInfsController < ApplicationController
   # GET /cust_infs
   def index
-    @cust_infs = CustInf.all(:order => "CName")
+    @cust_infs = CustInf.find(:all, :order => "CName", :conditions => ["delete_flag = 0"])
   end
 
   # GET /cust_infs/1
@@ -13,7 +13,7 @@ class CustInfsController < ApplicationController
   def new
     @cust_inf = CustInf.new
     @states = CustInf.find_by_sql("select distinct State from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
-    @state_list = [""]
+    @state_list = ["----Select State----"]
     @city_list = [""]
     @states.length.times do |index|
       @state_list << @states[index].State
@@ -24,7 +24,7 @@ class CustInfsController < ApplicationController
   def edit
     @cust_inf = CustInf.find(params[:id])
     @states = CustInf.find_by_sql("select distinct State from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
-    @state_list = [""]
+    @state_list = ["----Select State----"]
     @city_list = [""]
     @state = @cust_inf.State
     @city = @cust_inf.City
@@ -38,7 +38,7 @@ class CustInfsController < ApplicationController
     @cust_inf = CustInf.new(params[:cust_inf])
     @cust_inf.CName.capitalize!
     @states = CustInf.find_by_sql("select distinct State from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
-    @state_list = [""]
+    @state_list = ["----Select State----"]
     @city_list = [""]
     @states.length.times do |index|
       @state_list << @states[index].State
@@ -67,7 +67,7 @@ class CustInfsController < ApplicationController
   def update
     @cust_inf = CustInf.find(params[:id])
     @states = CustInf.find_by_sql("select distinct State from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
-    @state_list = [""]
+    @state_list = ["----Select State----"]
     @city_list = [""]
     @states.length.times do |index|
       @state_list << @states[index].State
@@ -94,9 +94,11 @@ class CustInfsController < ApplicationController
     slip_or_trans_id = @cust_inf.Slip_No || @cust_inf.Trans_id
     @install_book = InstallBook.find(:first, :conditions => ["Slip_Trans_id = ?", slip_or_trans_id])
     if ! @install_book.nil?
-      @install_book.destroy
+      ## @install_book.destroy
+      @install_book.update_attribute(:delete_flag,1)  ## Soft delete
     end
-    @cust_inf.destroy
+    ## @cust_inf.destroy
+    @cust_inf.update_attribute(:delete_flag,1)  ## Soft delete
     flash[:notice] = 'Customer was successfully deleted'
     redirect_to cust_infs_path
   end

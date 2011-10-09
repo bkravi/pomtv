@@ -1,7 +1,7 @@
 class InstallBooksController < ApplicationController
   # GET /install_books
   def index
-    @install_books = InstallBook.find(:all, :order => "CustId")
+    @install_books = InstallBook.find(:all, :order => "CustId", :conditions => ["delete_flag = 0"])
   end
 
   # GET /install_books/1
@@ -78,7 +78,7 @@ class InstallBooksController < ApplicationController
   # DELETE /install_books/1
   def destroy
     @install_book = InstallBook.find(params[:id])
-    @install_book.destroy
+    ## @install_book.destroy  ## We are not going to use delete intall_books records direct from UI in this release. May be in future...
     redirect_to install_books_path
   end
 
@@ -86,7 +86,7 @@ class InstallBooksController < ApplicationController
 
   def _fill_bookingfor_list
     booking_for = ["****No customer found to book****"]
-    @cust_list = CustInf.find_by_sql("select * from cust_infs where CustId not in (select CustId from install_books where GSK_No is not null) and NOT Installed order by CName")
+    @cust_list = CustInf.find_by_sql("select * from cust_infs where CustId not in (select CustId from install_books where GSK_No is not null and delete_flag = 0) and NOT Installed and delete_flag = 0 order by CName")
     @cust_list.length.times do |idx|
       booking_for = ["----Please select the customer----"] if idx == 0
       tmp_str = "#{(@cust_list[idx].Trans_id||@cust_list[idx].Slip_No) + '=>' + @cust_list[idx].CustId.to_s + '=>' + @cust_list[idx].CName + '=>' + @cust_list[idx].Contact_No.to_s + '=>' + @cust_list[idx].City}"

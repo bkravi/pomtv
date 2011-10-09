@@ -1,12 +1,9 @@
 %div{:class=>"mid_bg_add"}
   = form_for(@install_book) do |f|
+    = render "shared/flash_messages"
     = render "shared/error_messages", :target => @install_book
     %table{:cellpadding=>"3", :cellspacing=>"3", :style => "margin-left:50px;margin-top:10px"}
       %tbody{:class => 'bold'}
-        - if ! flash[:notice].nil?
-          %tr
-            %td{:colspan => 4, :style => "color:green;font-weight:bold;font-size:13px", :align => "center"}
-              %b= flash[:notice] 
         %tr
           %td{:colspan => 4, :class => 'note'}
             ** All fields are mandatory
@@ -15,6 +12,10 @@
             %h1 Workorder Details
             %br
             %br
+        %tr
+          %td
+          %td{:colspan => 3, :align => "left", :style => "color:green;font-size:11px"}
+            [Slip/TransID=>CustID=>CustName=>ContactNo=>City]
         %tr
           %td
             = f.label :GSK_No, 'Workorder For**'
@@ -39,6 +40,6 @@
           %td{:colspan => 3, :align => "right"}
             = f.submit ' Save and Exit ', :name => "save", :title => "Save and go back to main page", :disabled => @booking_for[0]=="****No customer found to book****"
             &nbsp;
-            = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue for another booking", :disabled => @booking_for[0]=="****No customer found to book****"
+            = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue for another workorder", :disabled => @booking_for[0]=="****No customer found to book****"
           %td{:colspan => "1",:align=>"left"}
-            = link_to button_to(' Cancel '), install_books_path, :method => "get", :title => "Cancel this booking"
+            = link_to button_to(' Cancel '), install_books_path, :method => "get", :title => "Cancel this workorder"

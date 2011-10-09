@@ -1,9 +1,6 @@
 %div{:class=>"mid_bg_add_bigger"}
+  = render "shared/flash_messages"
   %table{:border => 0}
-    - if ! flash[:notice].nil?
-      %tr
-        %td{:colspan => 16, :style => "color:green;font-weight:bold;font-size:13px", :align => "center"}
-          %b= flash[:notice] 
     %tr
       %td{:colspan => 8}
         %h1 Customers Details
@@ -16,7 +13,7 @@
       %td{:width => "100px"} Name
       %td Contact#
       %td Alt Cont#
-      %td{:width => "200px"} Address
+      %td Address
       %td State
       %td City
       %td Pincode
@@ -24,7 +21,7 @@
       %td Amount
       %td{:style => "white-space: nowrap;"} SCN
       %td Installed
-      %td{:width => "130px"} Remarks
+      %td Remarks
       %td{:colspan => 2, :align => "center"} Action
     - @cust_infs.each do |cust_inf|
       %tr{:class => cycle('list_line_odd','list_line_even')}

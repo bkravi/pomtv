@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007140505) do
+ActiveRecord::Schema.define(:version => 20111008135325) do
 
   create_table "cust_infs", :force => true do |t|
     t.integer  "CustId"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20111007140505) do
     t.string   "Remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "delete_flag",                               :default => 0
   end
 
   create_table "install_books", :force => true do |t|
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20111007140505) do
     t.string   "SmartcardNo"
     t.boolean  "Installed"
     t.string   "Remarks"
+    t.integer  "delete_flag",   :default => 0
   end
 
   create_table "statecity", :force => true do |t|

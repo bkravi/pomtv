@@ -1,12 +1,9 @@
 %div{:class=>"mid_bg_add"}
   = form_for(@install_book) do |f|
+    = render "shared/flash_messages"
     = render "shared/error_messages", :target => @install_book
     %table{:cellpadding=>"3", :cellspacing=>"3", :style => "margin-left:20px;margin-top:10px"}
       %tbody{:class => 'bold'}
-        - if ! flash[:notice].nil?
-          %tr
-            %td{:colspan => 4, :style => "color:green;font-weight:bold;font-size:13px", :align => "center"}
-              %b= flash[:notice] 
         %tr
           %td{:colspan => 4, :class => 'note'}
             ** All fields are mandatory

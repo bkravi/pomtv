@@ -7,8 +7,8 @@ class CustInf < ActiveRecord::Base
     self.Trans_id = (self.Trans_id.nil? || self.Trans_id.blank?) ? nil : self.Trans_id
     self.Slip_No = (self.Slip_No.nil? || self.Slip_No.blank?) ? nil : self.Slip_No
     self.Alt_Con_No = (self.Alt_Con_No.nil? || self.Alt_Con_No.blank?) ? nil : self.Alt_Con_No
-    self.SmartcardNo = (self.SmartcardNo.nil? || self.SmartcardNo.blank?) ? 0 : self.SmartcardNo  ## Will assign while booking
-    self.Remarks = (self.Remarks.nil? || self.Remarks.blank?) ? 0 : self.Remarks  ## Will assign while booking
+    self.SmartcardNo = (self.SmartcardNo.nil? || self.SmartcardNo.blank?) ? nil : self.SmartcardNo  ## Will assign while booking
+    self.Remarks = (self.Remarks.nil? || self.Remarks.blank?) ? nil : self.Remarks  ## Will assign while booking
     self.Installed = (self.Installed.nil? || self.Installed.blank?) ? 0 : self.Installed  ## Will assign when RCV is done
   end
 
