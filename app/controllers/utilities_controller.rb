@@ -15,8 +15,10 @@ class UtilitiesController < ApplicationController
 
     _write_excel(list_sheet, install_book)   
 
-    list_book.write "#{RAILS_ROOT}/public/downloads/#{list_name}"
-    list_path = "#{RAILS_ROOT}/public/downloads/#{list_name}"
+    ## list_book.write "#{RAILS_ROOT}/public/downloads/#{list_name}"
+    ## list_path = "#{RAILS_ROOT}/public/downloads/#{list_name}"
+     list_book.write "#{RAILS_ROOT}/tmp/#{list_name}"
+     list_path = "#{RAILS_ROOT}/tmp/#{list_name}"
     send_file list_path, :type => 'application/vnd.ms-excel'
   end
 
@@ -37,11 +39,11 @@ class UtilitiesController < ApplicationController
      install_book.length.times do |idx|
        row_counter += 1 
        list_sheet.row(row_counter).insert 0, install_book[idx].Slip_Trans_id.to_s
-       list_sheet.row(row_counter).insert 1, install_book[idx].GSK_No.to_i
-       list_sheet.row(row_counter).insert 2, install_book[idx].GSK_Pin.to_i
+       list_sheet.row(row_counter).insert 1, install_book[idx].GSK_No.to_s
+       list_sheet.row(row_counter).insert 2, install_book[idx].GSK_Pin.to_s
        list_sheet.row(row_counter).insert 3, install_book[idx].cust_inf.CName
-       list_sheet.row(row_counter).insert 4, install_book[idx].cust_inf.Contact_No.to_i
-       list_sheet.row(row_counter).insert 5, install_book[idx].cust_inf.Alt_Con_No.nil? ? '' : install_book[idx].cust_inf.Alt_Con_No.to_i
+       list_sheet.row(row_counter).insert 4, install_book[idx].cust_inf.Contact_No.to_s
+       list_sheet.row(row_counter).insert 5, install_book[idx].cust_inf.Alt_Con_No.nil? ? '' : install_book[idx].cust_inf.Alt_Con_No.to_s
        list_sheet.row(row_counter).insert 6, install_book[idx].cust_inf.Address
        list_sheet.row(row_counter).insert 7, install_book[idx].cust_inf.State
        list_sheet.row(row_counter).insert 8, install_book[idx].cust_inf.City

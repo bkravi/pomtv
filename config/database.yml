@@ -14,8 +14,8 @@ test:
   reconnect: false
   database: pomtv_test_db
   pool: 5
-  username: root
-  password: 
+  username: pomtv_test_db
+  password: pomtv_test_db
   host: localhost
 
 production:
@@ -24,6 +24,6 @@ production:
   reconnect: false
   database: pomtv_prod_db
   pool: 5
-  username: root
-  password: 
+  username: pomtv_prod_db
+  password: pomtv_prod_db
   host: localhost
