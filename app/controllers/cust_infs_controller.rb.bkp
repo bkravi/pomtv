@@ -1,7 +1,7 @@
 class CustInfsController < ApplicationController
   # GET /cust_infs
   def index
-    @cust_infs = CustInf.find(:all, :order => "cname", :conditions => ["delete_flag = 0"]).paginate(:page => params[:page], :per_page => 15)
+    @cust_infs = CustInf.find(:all, :order => "CName", :conditions => ["delete_flag = 0"]).paginate(:page => params[:page], :per_page => 15)
   end
 
   # GET /cust_infs/1
