@@ -14,46 +14,46 @@
             %br
         %tr
           %td
-            = f.label :GSK_No, 'Recharge Voucher For'
+            = f.label :gsk_no, 'Recharge Voucher For'
           %td
-            = f.text_field :GSK_Pin, :value => @install_book.cust_inf.CName, :class => 'text_feld_area', :disabled => true
+            = f.text_field :gsk_pin, :value => @install_book.cust_inf.cname, :class => 'text_feld_area', :disabled => true
           %td
-            = f.label :Slip_Trans_id, 'Slip/Trans ID'
+            = f.label :slip_trans_id, 'Slip/Trans ID'
           %td
-            = f.text_field :Slip_Trans_id, :class => 'text_feld_area', :disabled => true
+            = f.text_field :slip_trans_id, :class => 'text_feld_area', :disabled => true
         %tr
           %td{:colspan => 4}
             %br
         %tr
           %td
-            = f.label :GSK_No, 'GSK No'
+            = f.label :gsk_no, 'GSK No'
           %td
-            = f.text_field :GSK_No, :class => 'text_feld_area', :disabled => true
+            = f.text_field :gsk_no, :class => 'text_feld_area', :disabled => true
           %td
-            = f.label :GSK_Pin, 'GSK Pin'
+            = f.label :gsk_pin, 'GSK Pin'
           %td
-            = f.text_field :GSK_Pin, :class => 'text_feld_area', :disabled => true
+            = f.text_field :gsk_pin, :class => 'text_feld_area', :disabled => true
         %tr
           %td{:colspan => 4, :align => "center"}
             %hr{:style => "height:4px;background-color:#D6D9BA"}
         %tr
           %td
-            = f.label :SmartcardNo, 'Smartcard No**'
+            = f.label :smartcardno, 'Smartcard No**'
           %td
-            = f.text_field :SmartcardNo, :class => 'text_feld_area'
+            = f.text_field :smartcardno, :class => 'text_feld_area'
           %td
-            = f.label :RCV_Pin, 'RCV Pin**'
+            = f.label :rcv_pin, 'RCV Pin**'
           %td
-            = f.text_field :RCV_Pin, :class => 'text_feld_area'
+            = f.text_field :rcv_pin, :class => 'text_feld_area'
         %tr
           %td
-            = f.label :RCV_No, 'RCV No**'
+            = f.label :rcv_no, 'RCV No**'
           %td
-            = f.text_field :RCV_No, :class => 'text_feld_area'
+            = f.text_field :rcv_no, :class => 'text_feld_area'
           %td
-            = f.label :Remarks, 'Remarks'
+            = f.label :remarks, 'Remarks'
           %td
-            = f.text_area :Remarks, :size => "25x2"
+            = f.text_area :remarks, :size => "25x2"
         %tr
           %td{:colspan => 4, :align => "center"}
             %hr{:style => "height:4px;background-color:#D6D9BA"}

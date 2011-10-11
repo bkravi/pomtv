@@ -2,12 +2,12 @@ class UtilitiesController < ApplicationController
   require 'spreadsheet'
 
   def send_to_reliance
-    @utilities = @install_book = InstallBook.find(:all, :order => "Slip_Trans_id", :conditions => ["delete_flag = 0 and NOT Installed"]).paginate(:page => params[:page], :per_page => 20)
+    @utilities = @install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 20)
     render :layout => "reportlayout"
   end
 
   def save_reliance
-    install_book = InstallBook.find(:all, :order => "Slip_Trans_id", :conditions => ["delete_flag = 0 and NOT Installed"])
+    install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"])
     
     list_name = "#{Time.now.to_s.gsub(/[: +]/,'_')}_WorkorderList.xls"
     list_book = Spreadsheet::Workbook.new
@@ -38,15 +38,15 @@ class UtilitiesController < ApplicationController
 
      install_book.length.times do |idx|
        row_counter += 1 
-       list_sheet.row(row_counter).insert 0, install_book[idx].Slip_Trans_id.to_s
-       list_sheet.row(row_counter).insert 1, install_book[idx].GSK_No.to_s
-       list_sheet.row(row_counter).insert 2, install_book[idx].GSK_Pin.to_s
-       list_sheet.row(row_counter).insert 3, install_book[idx].cust_inf.CName
-       list_sheet.row(row_counter).insert 4, install_book[idx].cust_inf.Contact_No.to_s
-       list_sheet.row(row_counter).insert 5, install_book[idx].cust_inf.Alt_Con_No.nil? ? '' : install_book[idx].cust_inf.Alt_Con_No.to_s
-       list_sheet.row(row_counter).insert 6, install_book[idx].cust_inf.Address
-       list_sheet.row(row_counter).insert 7, install_book[idx].cust_inf.State
-       list_sheet.row(row_counter).insert 8, install_book[idx].cust_inf.City
+       list_sheet.row(row_counter).insert 0, install_book[idx].slip_trans_id.to_s
+       list_sheet.row(row_counter).insert 1, install_book[idx].gsk_no.to_s
+       list_sheet.row(row_counter).insert 2, install_book[idx].gsk_pin.to_s
+       list_sheet.row(row_counter).insert 3, install_book[idx].cust_inf.cname
+       list_sheet.row(row_counter).insert 4, install_book[idx].cust_inf.contact_no.to_s
+       list_sheet.row(row_counter).insert 5, install_book[idx].cust_inf.alt_con_no.nil? ? '' : install_book[idx].cust_inf.Alt_Con_No.to_s
+       list_sheet.row(row_counter).insert 6, install_book[idx].cust_inf.address
+       list_sheet.row(row_counter).insert 7, install_book[idx].cust_inf.state
+       list_sheet.row(row_counter).insert 8, install_book[idx].cust_inf.sity
      end
   end
 

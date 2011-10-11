@@ -28,29 +28,29 @@
         %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
           %td= install_book.CustId
           %td{:style => "white-space: nowrap;"}
-            = install_book.cust_inf.CName
+            = install_book.cust_inf.cname
           %td{:style => "white-space: nowrap;"}
-            = install_book.cust_inf.Contact_No
+            = install_book.cust_inf.contact_no
           %td{:style => "white-space: nowrap;"}
-            = install_book.cust_inf.City
+            = install_book.cust_inf.city
           %td{:style => "white-space: nowrap;"}
-            = install_book.Slip_Trans_id
+            = install_book.slip_trans_id
           %td{:style => "white-space: nowrap;"}
-            = install_book.GSK_No
+            = install_book.gsk_no
           %td{:style => "white-space: nowrap;"}
-            = install_book.GSK_Pin
+            = install_book.gsk_pin
           %td{:style => "white-space: nowrap;"}
-            = (install_book.SmartcardNo.nil? || install_book.SmartcardNo.blank?) ?  "N/A" : install_book.SmartcardNo
+            = (install_book.smartcardno.nil? || install_book.smartcardno.blank?) ?  "N/A" : install_book.smartcardno
           %td{:style => "white-space: nowrap;"}
-            = (install_book.RCV_No.nil? || install_book.RCV_No.blank?) ?  "N/A" : install_book.RCV_No
+            = (install_book.rcv_no.nil? || install_book.rcv_no.blank?) ?  "N/A" : install_book.rcv_no
           %td{:style => "white-space: nowrap;"}
-            = (install_book.RCV_Pin.nil? || install_book.RCV_Pin.blank?) ?  "N/A" : install_book.RCV_Pin
+            = (install_book.rcv_pin.nil? || install_book.rcv_pin.blank?) ?  "N/A" : install_book.rcv_pin
           %td
-            = install_book.Installed ? "YES" : "NO"
+            = install_book.installed ? "YES" : "NO"
           %td
-            = (install_book.Remarks.nil? || install_book.Remarks.blank?) ?  "N/A" : install_book.Remarks
+            = (install_book.remarks.nil? || install_book.remarks.blank?) ?  "N/A" : install_book.remarks
           %td{:align => "center"}
-            - if install_book.RCV_No.nil?
+            - if install_book.rcv_no.nil?
               = link_to image_tag('reliance_recharge.png',:title => 'Click to provide recharge voucher to customer'), edit_install_book_path(install_book.id)
             - else
               = image_tag('reliance_recharge_disable.png', :title => 'Recharge voucher already sent to customer')

@@ -24,23 +24,23 @@
   - @install_book.each do |install_book|
     %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
       %td
-        = install_book.Slip_Trans_id
+        = install_book.slip_trans_id
       %td
-        = install_book.GSK_No
+        = install_book.gsk_no
       %td
-        = install_book.GSK_Pin
+        = install_book.gsk_pin
       %td
-        = install_book.cust_inf.CName
+        = install_book.cust_inf.cname
       %td
-        = install_book.cust_inf.Contact_No
+        = install_book.cust_inf.contact_no
       %td
-        = install_book.cust_inf.Alt_Con_No || ''
+        = install_book.cust_inf.alt_con_no || ''
       %td
-        = install_book.cust_inf.Address
+        = install_book.cust_inf.address
       %td
-        = install_book.cust_inf.State
+        = install_book.cust_inf.state
       %td
-        = install_book.cust_inf.City
+        = install_book.cust_inf.city
 %br
 .paginate_ss
   = will_paginate

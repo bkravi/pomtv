@@ -4,20 +4,20 @@ class CustInf < ActiveRecord::Base
   before_update :set_default_values
   
   def set_default_values
-    self.Trans_id = (self.Trans_id.nil? || self.Trans_id.blank?) ? nil : self.Trans_id
-    self.Slip_No = (self.Slip_No.nil? || self.Slip_No.blank?) ? nil : self.Slip_No
-    self.Alt_Con_No = (self.Alt_Con_No.nil? || self.Alt_Con_No.blank?) ? nil : self.Alt_Con_No
-    self.SmartcardNo = (self.SmartcardNo.nil? || self.SmartcardNo.blank?) ? nil : self.SmartcardNo  ## Will assign while booking
-    self.Remarks = (self.Remarks.nil? || self.Remarks.blank?) ? nil : self.Remarks  ## Will assign while booking
-    self.Installed = (self.Installed.nil? || self.Installed.blank?) ? 0 : self.Installed  ## Will assign when RCV is done
+    self.trans_id = (self.trans_id.nil? || self.trans_id.blank?) ? nil : self.trans_id
+    self.slip_no = (self.slip_no.nil? || self.slip_no.blank?) ? nil : self.slip_no
+    self.alt_con_no = (self.alt_con_no.nil? || self.alt_con_no.blank?) ? nil : self.alt_con_no
+    self.smartcardno = (self.smartcardno.nil? || self.smartcardno.blank?) ? nil : self.smartcardno  ## Will assign while booking
+    self.remarks = (self.remarks.nil? || self.remarks.blank?) ? nil : self.remarks  ## Will assign while booking
+    self.installed = (self.installed.nil? || self.installed.blank?) ? 0 : self.installed  ## Will assign when RCV is done
   end
 
-  validates :CName, :presence => true
-  validates :Contact_No, :presence => true, :numericality => true
-  validates :Address, :presence => true
-  validates :State, :presence => true
-  validates :City, :presence => true
-  validates :PinCode, :presence => true, :length => 6..6, :numericality => true
-  validates :Date_of_reg, :presence => true
-  validates :Amount, :presence => true, :inclusion => (1000..30000)
+  validates :cname, :presence => true
+  validates :contact_no, :presence => true, :numericality => true
+  validates :address, :presence => true
+  validates :state, :presence => true
+  validates :city, :presence => true
+  validates :pincode, :presence => true, :length => 6..6, :numericality => true
+  validates :date_of_reg, :presence => true
+  validates :amount, :presence => true, :inclusion => (1000..30000)
 end
