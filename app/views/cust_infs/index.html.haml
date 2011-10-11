@@ -56,7 +56,7 @@
             = cust_inf.installed == true ? "YES" : "NO" 
           %td
             = (cust_inf.remarks.nil? || cust_inf.remarks.blank?) ?  "N/A" : cust_inf.remarks
-          - if ! cust_inf.Installed
+          - if ! cust_inf.installed
             %td{:align => "center"}
               = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.cname}'"), edit_cust_inf_path(cust_inf.id)
           - else

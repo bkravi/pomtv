@@ -26,7 +26,7 @@
         %td{:align => "center"} Action
       - @install_books.each do |install_book|
         %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
-          %td= install_book.CustId
+          %td= install_book.cust_id
           %td{:style => "white-space: nowrap;"}
             = install_book.cust_inf.cname
           %td{:style => "white-space: nowrap;"}

@@ -43,10 +43,10 @@ class UtilitiesController < ApplicationController
        list_sheet.row(row_counter).insert 2, install_book[idx].gsk_pin.to_s
        list_sheet.row(row_counter).insert 3, install_book[idx].cust_inf.cname
        list_sheet.row(row_counter).insert 4, install_book[idx].cust_inf.contact_no.to_s
-       list_sheet.row(row_counter).insert 5, install_book[idx].cust_inf.alt_con_no.nil? ? '' : install_book[idx].cust_inf.Alt_Con_No.to_s
+       list_sheet.row(row_counter).insert 5, install_book[idx].cust_inf.alt_con_no.nil? ? '' : install_book[idx].cust_inf.alt_con_no.to_s
        list_sheet.row(row_counter).insert 6, install_book[idx].cust_inf.address
        list_sheet.row(row_counter).insert 7, install_book[idx].cust_inf.state
-       list_sheet.row(row_counter).insert 8, install_book[idx].cust_inf.sity
+       list_sheet.row(row_counter).insert 8, install_book[idx].cust_inf.city
      end
   end
 
