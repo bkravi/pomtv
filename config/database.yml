@@ -1,9 +1,6 @@
-production:
-  adapter: mysql
-  encoding: utf8
-  reconnect: false
-  database: pomtv_prod_db
+development:
+  adapter: sqlite3
+  database: db/dev.sqlite3
   pool: 5
-  username: pomtv_prod_db
-  password: pomtv_prod_db
-  host: localhost
+  timeout: 5000
+
