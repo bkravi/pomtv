@@ -18,7 +18,7 @@
             [Slip/TransID=>CustID=>CustName=>ContactNo=>City]
         %tr
           %td
-            = f.label :GSK_No, 'Workorder For**'
+            = f.label :gsk_no, 'Workorder For**'
           %td{:colspan => 3, :align => "left"}
             = select :booking_for_cust, :cust, @booking_for
         %tr
@@ -26,13 +26,13 @@
             %br
         %tr
           %td
-            = f.label :GSK_No, 'GSK No**'
+            = f.label :gsk_no, 'GSK No**'
           %td
-            = f.text_field :GSK_No, :class => 'text_feld_area', :disabled => @booking_for[0]=="****No customer found to book****"
+            = f.text_field :gsk_no, :class => 'text_feld_area', :disabled => @booking_for[0]=="****No customer found to book****"
           %td
-            = f.label :GSK_Pin, 'GSK Pin**'
+            = f.label :gsk_pin, 'GSK Pin**'
           %td
-            = f.text_field :GSK_Pin, :class => 'text_feld_area', :disabled => @booking_for[0]=="****No customer found to book****"
+            = f.text_field :gsk_pin, :class => 'text_feld_area', :disabled => @booking_for[0]=="****No customer found to book****"
         %tr
           %td{:colspan => 4, :align => "center"}
             %hr{:style => "height:4px;background-color:#D6D9BA"}

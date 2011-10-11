@@ -15,67 +15,67 @@
             %br
         %tr
           %td
-            = f.label :Slip_No, 'Payment Slip No'
+            = f.label :slip_no, 'Payment Slip No'
           %td
-            = f.text_field :Slip_No, :class => 'text_feld_area'
+            = f.text_field :slip_no, :class => 'text_feld_area'
           %td
             %u OR
-            = f.label :Trans_id, ' Transaction ID'
+            = f.label :trans_id, ' Transaction ID'
           %td
-            = f.text_field :Trans_id, :class => 'text_feld_area'
+            = f.text_field :trans_id, :class => 'text_feld_area'
         %tr
           %td
-            = f.label :Date_of_reg, 'Payment Date**'
+            = f.label :date_of_reg, 'Payment Date**'
           %td
-            = f.date_select :Date_of_reg, :start_year => 2010, :end_year => Time.now.year, :order => [:day, :month, :year]
+            = f.date_select :date_of_reg, :start_year => 2010, :end_year => Time.now.year, :order => [:day, :month, :year]
           %td
-            = f.label :Amount, 'Amount Paid**'
+            = f.label :amount, 'Amount Paid**'
           %td
-            = f.text_field :Amount, :class => 'text_feld_area_small'
+            = f.text_field :amount, :class => 'text_feld_area_small'
             Rs.
         %tr
           %td{:colspan => 4, :align => "center"}
             %hr{:style => "height:4px;background-color:#D6D9BA"}
         %tr
           %td
-            = f.label :CName, 'Customer Name**'
+            = f.label :cname, 'Customer Name**'
           %td
-            = f.text_field :CName, :class => 'text_feld_area'
+            = f.text_field :cname, :class => 'text_feld_area'
           %td
-            = f.label :Contact_No, 'Contact No**'
+            = f.label :contact_no, 'Contact No**'
           %td
-            = f.text_field :Contact_No, :class => 'text_feld_area'
+            = f.text_field :contact_no, :class => 'text_feld_area'
         %tr
           %td
-            = f.label :Alt_Con_No, 'Alternate Contact No'
+            = f.label :alt_con_no, 'Alternate Contact No'
           %td
-            = f.text_field :Alt_Con_No, :class => 'text_feld_area'
+            = f.text_field :alt_con_no, :class => 'text_feld_area'
           %td
-            = f.label :Address, 'Address**'
+            = f.label :address, 'Address**'
           %td
-            = f.text_area :Address, :size=> "26x2", :class => 'write_area'
+            = f.text_area :address, :size=> "26x2", :class => 'write_area'
         %tr
           %td
-            = f.label :State, 'State**'
+            = f.label :state, 'State**'
           - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td
-              = f.text_field :State, :class => 'text_feld_area', :disabled => true
+              = f.text_field :state, :class => 'text_feld_area', :disabled => true
           - else
             %td
-              = select :cust_inf, :State, @state_list
+              = select :cust_inf, :state, @state_list
           %td
-            = f.label :City, 'City**'
+            = f.label :city, 'City**'
           - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td
-              = f.text_field :City, :class => 'text_feld_area', :disabled => true
+              = f.text_field :city, :class => 'text_feld_area', :disabled => true
           - else
             %td
-              = select :cust_inf, :City, @city_list
+              = select :cust_inf, :city, @city_list
         %tr
           %td
-            = f.label :PinCode, 'Pincode**'
+            = f.label :pincode, 'Pincode**'
           %td
-            = f.text_field :PinCode, :class => 'text_feld_area_small'
+            = f.text_field :pincode, :class => 'text_feld_area_small'
           %td{:colspan => 2} 
         %tr
           - if @controller.action_name == 'edit' || @controller.action_name == 'update'

@@ -5,14 +5,14 @@ class InstallBook < ActiveRecord::Base
   before_update :set_default_values
   
   def set_default_values
-    self.RCV_No = (self.RCV_No.nil? || self.RCV_No.blank?) ? nil : self.RCV_No
-    self.RCV_Pin = (self.RCV_Pin.nil? || self.RCV_Pin.blank?) ? nil : self.RCV_Pin
-    self.Slip_Trans_id = (self.Slip_Trans_id.nil? || self.Slip_Trans_id.blank?) ? nil : self.Slip_Trans_id
-    self.SmartcardNo = (self.SmartcardNo.nil? || self.SmartcardNo.blank?) ? nil : self.SmartcardNo
-    self.Remarks = (self.Remarks.nil? || self.Remarks.blank?) ? nil : self.Remarks
-    self.Installed = (self.Installed.nil? || self.Installed.blank?) ? 0 : self.Installed
+    self.rcv_no = (self.rcv_no.nil? || self.rcv_no.blank?) ? nil : self.rcv_no
+    self.rcv_pin = (self.rcv_pin.nil? || self.rcv_pin.blank?) ? nil : self.rcv_pin
+    self.slip_trans_id = (self.slip_trans_id.nil? || self.slip_trans_id.blank?) ? nil : self.slip_trans_id
+    self.smartcardno = (self.smartcardno.nil? || self.smartcardno.blank?) ? nil : self.smartcardno
+    self.remarks = (self.remarks.nil? || self.remarks.blank?) ? nil : self.remarks
+    self.installed = (self.installed.nil? || self.installed.blank?) ? 0 : self.installed
   end
 
-  validates :GSK_No, :presence => true, :length => 1..18, :numericality => true
-  validates :GSK_Pin, :presence => true, :length => 1..18, :numericality => true
+  validates :gsk_no, :presence => true, :length => 1..18, :numericality => true
+  validates :gsk_pin, :presence => true, :length => 1..18, :numericality => true
 end

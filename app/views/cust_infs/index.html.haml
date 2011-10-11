@@ -29,41 +29,41 @@
       - @cust_infs.each do |cust_inf|
         %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
           %td
-            = cust_inf.CustId
+            = cust_inf.cust_id
           %td{:style => "white-space: nowrap;"}
-            = cust_inf.Slip_No || cust_inf.Trans_id
+            = cust_inf.slip_no || cust_inf.trans_id
           %td
-            = cust_inf.CName 
+            = cust_inf.cname 
           %td
-            = cust_inf.Contact_No 
+            = cust_inf.contact_no 
           %td
-            = (cust_inf.Alt_Con_No.nil? || cust_inf.Alt_Con_No.blank?) ?  "N/A" : cust_inf.Alt_Con_No
+            = (cust_inf.alt_con_no.nil? || cust_inf.alt_con_no.blank?) ?  "N/A" : cust_inf.alt_con_no
           %td
-            = cust_inf.Address 
+            = cust_inf.address 
           %td
-            = cust_inf.State 
+            = cust_inf.state 
           %td
-            = cust_inf.City 
+            = cust_inf.city 
           %td
-            = cust_inf.PinCode 
+            = cust_inf.pincode 
           %td{:style => "white-space: nowrap;"}
-            = cust_inf.Date_of_reg.strftime('%d-%b-%y') 
+            = cust_inf.date_of_reg.strftime('%d-%b-%y') 
           %td
-            = cust_inf.Amount.to_i 
+            = cust_inf.amount.to_i 
           %td{:style => "white-space: nowrap;"}
-            = (cust_inf.SmartcardNo.nil? || cust_inf.SmartcardNo.blank?) ?  "N/A" : cust_inf.SmartcardNo
+            = (cust_inf.smartcardno.nil? || cust_inf.smartcardno.blank?) ?  "N/A" : cust_inf.smartcardno
           %td
-            = cust_inf.Installed == true ? "YES" : "NO" 
+            = cust_inf.installed == true ? "YES" : "NO" 
           %td
-            = (cust_inf.Remarks.nil? || cust_inf.Remarks.blank?) ?  "N/A" : cust_inf.Remarks
+            = (cust_inf.remarks.nil? || cust_inf.remarks.blank?) ?  "N/A" : cust_inf.remarks
           - if ! cust_inf.Installed
             %td{:align => "center"}
-              = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.CName}'"), edit_cust_inf_path(cust_inf.id)
+              = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.cname}'"), edit_cust_inf_path(cust_inf.id)
           - else
             %td{:align => "center"}
               = image_tag('edit_disable.png',:title => "Installation already done so no edit allow !!")
           %td{:align => "center"}
-            = link_to image_tag('delete.png',:title => "Delete '#{cust_inf.CName}'"), cust_inf, :confirm => "Are you sure to delete #{cust_inf.CName}?", :method => :delete
+            = link_to image_tag('delete.png',:title => "Delete '#{cust_inf.cname}'"), cust_inf, :confirm => "Are you sure to delete #{cust_inf.cname}?", :method => :delete
   .paginate_ss
     %br
     = will_paginate

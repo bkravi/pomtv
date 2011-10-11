@@ -10,24 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111009094222) do
+ActiveRecord::Schema.define(:version => 20111011171354) do
 
   create_table "cust_infs", :force => true do |t|
-    t.integer  "CustId"
-    t.string   "Trans_id"
-    t.string   "Slip_No"
-    t.string   "CName"
-    t.string   "Contact_No"
-    t.string   "Alt_Con_No"
-    t.string   "Address"
-    t.string   "State"
-    t.string   "City"
-    t.integer  "PinCode"
-    t.date     "Date_of_reg"
-    t.decimal  "Amount",      :precision => 8, :scale => 2, :default => 0.0
-    t.string   "SmartcardNo"
-    t.boolean  "Installed"
-    t.string   "Remarks"
+    t.integer  "cust_id"
+    t.string   "trans_id"
+    t.string   "slip_no"
+    t.string   "cname"
+    t.string   "contact_no"
+    t.string   "alt_con_no"
+    t.string   "address"
+    t.string   "state"
+    t.string   "city"
+    t.integer  "pincode"
+    t.date     "date_of_reg"
+    t.decimal  "amount",      :precision => 8, :scale => 2, :default => 0.0
+    t.string   "smartcardno"
+    t.boolean  "installed"
+    t.string   "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "delete_flag",                               :default => 0
@@ -35,30 +35,30 @@ ActiveRecord::Schema.define(:version => 20111009094222) do
 
   create_table "install_books", :force => true do |t|
     t.integer  "cust_inf_id"
-    t.integer  "CustId"
-    t.string   "GSK_No"
-    t.string   "GSK_Pin"
-    t.string   "RCV_No"
-    t.string   "RCV_Pin"
+    t.integer  "cust_id"
+    t.string   "gsk_no"
+    t.string   "gsk_pin"
+    t.string   "rcv_no"
+    t.string   "rcv_pin"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "Slip_Trans_id"
-    t.string   "SmartcardNo"
-    t.boolean  "Installed"
-    t.string   "Remarks"
+    t.string   "slip_trans_id"
+    t.string   "smartcardno"
+    t.boolean  "installed"
+    t.string   "remarks"
     t.integer  "delete_flag",   :default => 0
   end
 
   create_table "statecity", :force => true do |t|
-    t.string   "State"
-    t.string   "City"
+    t.string   "state"
+    t.string   "city"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "swamaan_lists", :force => true do |t|
-    t.integer  "SwamaanID"
-    t.string   "Swamaan"
+    t.integer  "swamaan_id"
+    t.string   "swamaan"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

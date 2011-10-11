@@ -1,7 +1,7 @@
 var state_city_array = new Array();
 
 <% for s_c in @state_city_list -%>
-  state_city_array.push(new Array('<%= s_c.State %>','<%= s_c.City %>'))
+  state_city_array.push(new Array('<%= s_c.state %>','<%= s_c.city %>'))
 <% end -%>
 
 function getCities() {

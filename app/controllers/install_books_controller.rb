@@ -1,7 +1,7 @@
 class InstallBooksController < ApplicationController
   # GET /install_books
   def index
-    @install_books = InstallBook.find(:all, :order => "CustId", :conditions => ["delete_flag = 0"]).paginate(:page => params[:page], :per_page => 15)
+    @install_books = InstallBook.find(:all, :order => "cust_id", :conditions => ["delete_flag = 0"]).paginate(:page => params[:page], :per_page => 15)
   end
 
   # GET /install_books/1
@@ -35,9 +35,9 @@ class InstallBooksController < ApplicationController
       booking_contactno = booking_for_list[3]
       booking_city = booking_for_list[4]
       if @install_book.save
-        @install_book.update_attribute(:Slip_Trans_id, booking_slip_or_transid)
+        @install_book.update_attribute(:slip_trans_id, booking_slip_or_transid)
         @install_book.update_attribute(:cust_inf_id, booking_custid)
-        @install_book.update_attribute(:CustId, booking_custid)
+        @install_book.update_attribute(:cust_id, booking_custid)
         flash[:notice] = 'Workorder successfully created'
         if params[:save]
           redirect_to install_books_path
@@ -53,20 +53,20 @@ class InstallBooksController < ApplicationController
   # PUT /install_books/1
   def update
     @install_book = InstallBook.find(params[:id])
-    @install_book.SmartcardNo = params[:install_book][:SmartcardNo]
-    @install_book.RCV_No = params[:install_book][:RCV_No]
-    @install_book.RCV_Pin = params[:install_book][:RCV_Pin]
-    @install_book.Remarks = params[:install_book][:Remarks]
-    if params[:install_book][:SmartcardNo].nil? || params[:install_book][:SmartcardNo].blank? || params[:install_book][:RCV_No].nil? || params[:install_book][:RCV_No].blank? || params[:install_book][:RCV_Pin].nil? || params[:install_book][:RCV_Pin].blank?
+    @install_book.smartcardno = params[:install_book][:smartcardno]
+    @install_book.rcv_no = params[:install_book][:rcv_no]
+    @install_book.rcv_pin = params[:install_book][:rcv_pin]
+    @install_book.remarks = params[:install_book][:remarks]
+    if params[:install_book][:smartcardno].nil? || params[:install_book][:smartcardno].blank? || params[:install_book][:rcv_no].nil? || params[:install_book][:rcv_no].blank? || params[:install_book][:rcv_pin].nil? || params[:install_book][:rcv_pin].blank?
       flash[:notice] = "#ERROR#Neither of the Smartcard No, RCV Pin, RCV No can be blank"
       render :action => "edit"
     else
       if @install_book.update_attributes(params[:install_book])
-        @install_book.update_attribute(:Installed, 1)
-        cust_inf = CustInf.find(:first, :conditions => ["Slip_No = '#{@install_book.Slip_Trans_id}' or Trans_id = '#{@install_book.Slip_Trans_id}'"])
-        cust_inf.update_attribute(:Installed, 1)
-        cust_inf.update_attribute(:SmartcardNo, @install_book.SmartcardNo)
-        cust_inf.update_attribute(:Remarks, @install_book.Remarks)
+        @install_book.update_attribute(:installed, 1)
+        cust_inf = CustInf.find(:first, :conditions => ["slip_no = '#{@install_book.slip_trans_id}' or Trans_id = '#{@install_book.slip_trans_id}'"])
+        cust_inf.update_attribute(:installed, 1)
+        cust_inf.update_attribute(:smartcardno, @install_book.smartcardno)
+        cust_inf.update_attribute(:remarks, @install_book.remarks)
         flash[:notice] = 'Recharge voucher successfully updated'
         redirect_to install_books_path
       else
@@ -86,10 +86,10 @@ class InstallBooksController < ApplicationController
 
   def _fill_bookingfor_list
     booking_for = ["****No customer found to book****"]
-    @cust_list = CustInf.find_by_sql("select * from cust_infs where CustId not in (select CustId from install_books where GSK_No is not null and delete_flag = 0) and NOT Installed and delete_flag = 0 order by CName")
+    @cust_list = CustInf.find_by_sql("select * from cust_infs where cust_id not in (select cust_id from install_books where gsk_no is not null and delete_flag = 0) and NOT installed and delete_flag = 0 order by cname")
     @cust_list.length.times do |idx|
       booking_for = ["----Please select the customer----"] if idx == 0
-      tmp_str = "#{(@cust_list[idx].Trans_id||@cust_list[idx].Slip_No) + '=>' + @cust_list[idx].CustId.to_s + '=>' + @cust_list[idx].CName + '=>' + @cust_list[idx].Contact_No.to_s + '=>' + @cust_list[idx].City}"
+      tmp_str = "#{(@cust_list[idx].trans_id||@cust_list[idx].slip_no) + '=>' + @cust_list[idx].cust_id.to_s + '=>' + @cust_list[idx].cname + '=>' + @cust_list[idx].contact_no.to_s + '=>' + @cust_list[idx].city}"
       booking_for << tmp_str
     end
     return booking_for

@@ -36,8 +36,6 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
-    annotate (2.4.0)
-    annotate-models (1.0.4)
     arel (2.0.10)
     builder (2.1.2)
     cancan (1.6.6)
@@ -157,8 +155,6 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  annotate
-  annotate-models
   authlogic!
   cancan
   capistrano

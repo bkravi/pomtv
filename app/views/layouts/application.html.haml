@@ -10,8 +10,9 @@
     #navigation
       = render_navigation
     %p.hrule
-    - swamaan = SwamaanList.find(:first, :conditions => ["SwamaanID = ?", rand(SwamaanList.count)+1]) || "Mein Maya Jeet Jagat Jeet Aatma Hun" 
+    - swamaan = SwamaanList.find(:first, :conditions => ["swamaan_id = ?", rand(SwamaanList.count)+1])
+    - swamaan = swamaan.nil? ? "Mein Maya Jeet Jagat Jeet Aatma Hun" : swamaan.swamaan
     %marquee.marque{:scrollamount => 5} 
-      = "SWAMAAN: " + swamaan.Swamaan
+      = "SWAMAAN: " + swamaan
     #contentBodynew
       = yield
