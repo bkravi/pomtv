@@ -9,16 +9,16 @@
       %td Description
     %tr.datarow{:class => 'list_line_odd'}
       %td
-        = link_to '1', utilities_path
+        = link_to '1', utilities_path, :title => 'Click to go'
       %td{:style => "white-space: nowrap;"}
-        = link_to 'Report To Be Sent To Reliance To Install A New Connection', send_to_reliance_path
+        = link_to 'Report To Be Sent To Reliance To Install A New Connection', send_to_reliance_path, :title => 'Click to go'
       %td{:style => "color:#74393F"}
         %b For Which GSK PIN & GSK NO Has Already Been Allotted
     %tr.datarow{:class => 'list_line_even'}
       %td
-        = link_to '2', utilities_path
+        = link_to '2', utilities_path, :disabled => true, :title => 'Currently unavailable'
       %td{:style => "white-space: nowrap;"}
-        = link_to 'Report Showing Total Installations In A Particular Month', utilities_path
+        = link_to 'Report Showing Total Installations In A Particular Month', utilities_path, :disabled => true, :title => 'Currently unavailable'
       %td{:style => "color:#74393F"}
         %b For Which 'Installed' Column Is 'YES'
 
