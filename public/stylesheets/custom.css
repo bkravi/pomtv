@@ -123,4 +123,7 @@ table tr.list_line_even {background-color: #9999FF;}
 .row_hover tr.datarow:hover{background-color: #ABDD91;opacity: .8;}
 .mid_bg_add_utilities tr.datarow a{font-size:17px; color:black; font-weight:bold;text-decoration:none;}
 .mid_bg_add_utilities tr.datarow a:hover, .mid_bg_add_utilities tr.datarow a:focus{color:yellow; background-color:black}
-
+.sort_search_tag{font-size:15px;padding-left:15px}
+.sort_search_tag a, .sort_search_tag a:visited{background-color:red;color:yellow;font-weight:bold;text-decoration:none;border:white 1px solid}
+.sort_search_tag a:hover{background-color:yellow;color:red}
+.sort_search_tag legend{color:#dfd;font-family:sans-serif;background:#141;padding:0.1em 0.5em;}

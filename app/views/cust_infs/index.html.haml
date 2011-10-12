@@ -2,6 +2,7 @@
   = render "shared/flash_messages"
   .paginate_ss
     = will_paginate
+  = render 'sort_filter_cust_form'
   .row_hover
     %table{:border => 0}
       %tr
@@ -58,12 +59,12 @@
             = (cust_inf.remarks.nil? || cust_inf.remarks.blank?) ?  "N/A" : cust_inf.remarks
           - if ! cust_inf.installed
             %td{:align => "center"}
-              = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.cname}'"), edit_cust_inf_path(cust_inf.id)
+              = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.cname}'", :style => "border:none"), edit_cust_inf_path(cust_inf.id)
           - else
             %td{:align => "center"}
               = image_tag('edit_disable.png',:title => "Installation already done so no edit allow !!")
           %td{:align => "center"}
-            = link_to image_tag('delete.png',:title => "Delete '#{cust_inf.cname}'"), cust_inf, :confirm => "Are you sure to delete #{cust_inf.cname}?", :method => :delete
+            = link_to image_tag('delete.png',:title => "Delete '#{cust_inf.cname}'", :style => "border:none"), cust_inf, :confirm => "Are you sure to delete #{cust_inf.cname}?", :method => :delete
   .paginate_ss
     %br
     = will_paginate

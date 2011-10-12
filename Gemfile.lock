@@ -38,7 +38,11 @@ GEM
     activesupport (3.0.7)
     arel (2.0.10)
     builder (2.1.2)
-    cancan (1.6.7)
+<<<<<<< HEAD
+    cancan (1.6.6)
+=======
+    cancan (1.6.6)
+>>>>>>> b7783c7331e883642d49f73ac53df529a82ec697
     capistrano (2.9.0)
       highline
       net-scp (>= 1.0.0)
