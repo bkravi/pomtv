@@ -1,0 +1,31 @@
+.sort_search_tag
+  %br
+  = form_tag show_sorted_path do
+    %table{:border => 0}
+      %tr
+        -# For the time being not implementing sorting...
+        -#%td
+        -#  %fieldset
+        -#    %legend Sort
+        -#    = select :sort_by, :val, @sort_on
+        %td
+          %fieldset
+            %legend Filter Records
+            %b Name:
+            = text_field_tag 'nm', @_nm, :style => "width:100px"
+            &nbsp;&nbsp;
+            %b Address:
+            = text_field_tag 'add', @_add, :style => "width:100px"
+            &nbsp;&nbsp;
+            %b Contact:
+            = text_field_tag 'cont', @_cont, :style => "width:100px"
+            &nbsp;&nbsp;
+            %b State:
+            = text_field_tag 'st', @_st, :style => "width:100px"
+            &nbsp;&nbsp;
+            %b Installed:
+            = select :is_installed, :val, ["NO","YES","ALL"], :selected => @_ins
+        %td{:valign => "bottom", :style => "padding-bottom:7px"}
+          &nbsp;
+          = submit_tag ' GO '
+

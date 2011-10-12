@@ -38,7 +38,11 @@ GEM
     activesupport (3.0.7)
     arel (2.0.10)
     builder (2.1.2)
-    cancan (~>1.6.6)
+<<<<<<< HEAD
+    cancan (1.6.6)
+=======
+    cancan (1.6.6)
+>>>>>>> b7783c7331e883642d49f73ac53df529a82ec697
     capistrano (2.9.0)
       highline
       net-scp (>= 1.0.0)
@@ -68,7 +72,10 @@ GEM
     diff-lcs (1.1.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    ffi (1.0.9)
     ffi (1.0.9-x86-mingw32)
+    gherkin (2.5.1)
+      json (>= 1.4.6)
     gherkin (2.5.1-x86-mingw32)
       json (>= 1.4.6)
     haml (3.1.3)
@@ -85,6 +92,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mysql (2.8.1)
     mysql (2.8.1-x86-mingw32)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -93,6 +101,7 @@ GEM
     net-ssh (2.2.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    nokogiri (1.5.0)
     nokogiri (1.5.0-x86-mingw32)
     polyglot (0.3.2)
     rack (1.2.4)
@@ -138,6 +147,7 @@ GEM
       activesupport (>= 2.3.2)
     spreadsheet (0.6.5.9)
       ruby-ole (>= 1.0)
+    sqlite3 (1.3.4)
     sqlite3 (1.3.4-x86-mingw32)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
@@ -152,6 +162,7 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
