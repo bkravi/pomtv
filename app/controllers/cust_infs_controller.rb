@@ -61,7 +61,7 @@ class CustInfsController < ApplicationController
   # GET /cust_infs/new
   def new
     @cust_inf = CustInf.new
-    @states = CustInf.find_by_sql("select distinct state from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state, city")
+    @states = CustInf.find_by_sql("select distinct state from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
     @state_list = ["----Select State----"]
     @city_list = [""]
     @states.length.times do |index|
@@ -72,7 +72,7 @@ class CustInfsController < ApplicationController
   # GET /cust_infs/1/edit
   def edit
     @cust_inf = CustInf.find(params[:id])
-    @states = CustInf.find_by_sql("select distinct state from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state, city")
+    @states = CustInf.find_by_sql("select distinct state from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
     @state_list = ["----Select State----"]
     @city_list = [""]
     @state = @cust_inf.state
@@ -86,7 +86,7 @@ class CustInfsController < ApplicationController
   def create
     @cust_inf = CustInf.new(params[:cust_inf])
     @cust_inf.cname.capitalize!
-    @states = CustInf.find_by_sql("select distinct state from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state, city")
+    @states = CustInf.find_by_sql("select distinct state from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
     @state_list = ["----Select State----"]
     @city_list = [""]
     @states.length.times do |index|
@@ -115,7 +115,7 @@ class CustInfsController < ApplicationController
   # PUT /cust_infs/1
   def update
     @cust_inf = CustInf.find(params[:id])
-    @states = CustInf.find_by_sql("select distinct state from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state, city")
+    @states = CustInf.find_by_sql("select distinct state from statecity where state is not null and city is not null and state <> '' and city  <> '' order by state")
     @state_list = ["----Select State----"]
     @city_list = [""]
     @states.length.times do |index|
