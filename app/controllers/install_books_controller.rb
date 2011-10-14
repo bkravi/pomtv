@@ -1,7 +1,39 @@
 class InstallBooksController < ApplicationController
   # GET /install_books
   def index
-    @install_books = InstallBook.find(:all, :order => "cust_id", :conditions => ["delete_flag = 0"]).paginate(:page => params[:page], :per_page => 15)
+    @_nm = ''
+    @_slp = ''
+    @_gskno = ''
+    @_gskpin = ''
+    @_scn = ''
+    @_rcvno = ''
+    @_rcvpin = ''
+    @install_books = InstallBook.find(:all, :order => "installed, slip_trans_id", :conditions => ["delete_flag = 0"]).paginate(:page => params[:page], :per_page => 100)
+  end
+
+  def show_sorted_install
+    @_nm = params[:nm]
+    @_slp= params[:slp]
+    @_gskno= params[:gskno]
+    @_gskpin= params[:gskpin]
+    @_scn= params[:scn]
+    @_rcvno= params[:rcvno]
+    @_rcvpin= params[:rcvpin]
+    cust_qry_array = ["select distinct cust_id from cust_infs where delete_flag = 0"]
+    cust_qry_array << "upper(cname) like '#{@_nm.to_s.upcase}%'" if ! @_nm.blank?
+    cust_qry = cust_qry_array.join(" and ") + " order by cname "
+    
+    qry_array = ["select * from install_books where delete_flag = 0 and cust_id in (#{cust_qry})"]
+    qry_array << "upper(slip_trans_id) like '#{@_slp.to_s.upcase}%'" if ! @_slp.blank?
+    qry_array << "gsk_no like '#{@_gskno}%'" if ! @_gskno.blank?
+    qry_array << "gsk_pin like '#{@_gskpin}%'" if ! @_gskpin.blank?
+    qry_array << "smartcardno like '#{@_scn}%'" if ! @_scn.blank?
+    qry_array << "rcv_no like '#{@_rcvno}%'" if ! @_rcvno.blank?
+    qry_array << "rcv_pin like '#{@_rcvpin}%'" if ! @_rcvpin.blank?
+    qry = qry_array.join(" and ") + " order by installed, slip_trans_id"
+    @install_books = InstallBook.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
+    render :action => "index"
+    #render :text => qry_array
   end
 
   # GET /install_books/1

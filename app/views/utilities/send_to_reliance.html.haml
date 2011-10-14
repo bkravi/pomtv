@@ -1,7 +1,7 @@
 .paginate_ss
   = will_paginate
 %br
-%table{:border => 0}
+%table{:border => 0, :cellspacing => 0}
   %tr
     %td{:colspan => 8, :align => "center", :style => "font-size:15px;padding-bottom:10px"}
       %b Report To Be Sent To Reliance For New Customer Installation
@@ -11,7 +11,7 @@
           = submit_tag ' Save ', :title => "Save as Excel file"
       - else
         = button_to(' Save ', {}, :disabled => true)
-  %tr{:style => "font-weight:bold;background-color: blue;color:white"}
+  %tr{:style => "font-weight:bold;background-color: blue;color:white;", :class => "report_border"}
     %td Slip/Trans ID
     %td GSK NO
     %td GSK PIN
@@ -22,7 +22,7 @@
     %td State
     %td City
   - @install_book.each do |install_book|
-    %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
+    %tr.datarow{:class => cycle('list_line_odd_report','list_line_even_report')}
       %td
         = install_book.slip_trans_id
       %td
@@ -34,7 +34,7 @@
       %td
         = install_book.cust_inf.contact_no
       %td
-        = install_book.cust_inf.alt_con_no || ''
+        = install_book.cust_inf.alt_con_no || "N/A"
       %td
         = install_book.cust_inf.address
       %td

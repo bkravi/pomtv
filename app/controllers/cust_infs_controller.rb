@@ -41,10 +41,10 @@ class CustInfsController < ApplicationController
     @_cont = params[:cont]
     @_st= params[:st]
     qry_array = ["select * from cust_infs where delete_flag = 0"]
-    qry_array << "upper(cname) like '#{@_nm.upcase}%'" if ! @_nm.blank?
-    qry_array << "upper(address) like '#{@_add.upcase}%'" if ! @_add.blank?
+    qry_array << "upper(cname) like '#{@_nm.to_s.upcase}%'" if ! @_nm.blank?
+    qry_array << "upper(address) like '#{@_add.to_s.upcase}%'" if ! @_add.blank?
     qry_array << "contact_no like '#{@_cont}%'" if ! @_cont.blank?
-    qry_array << "upper(state) like '#{@_st.upcase}%'" if ! @_st.blank?
+    qry_array << "upper(state) like '#{@_st.to_s.upcase}%'" if ! @_st.blank?
     qry_array << "NOT installed" if @_ins == "NO"
     qry_array << "installed" if @_ins == "YES"
     qry = qry_array.join(" and ") + " order by #{sort} "
