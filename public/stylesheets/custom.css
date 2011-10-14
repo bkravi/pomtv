@@ -112,6 +112,8 @@ ul.navigation li {
 .note{color:red;font-size:12px;font-style:italic;}
 table tr.list_line_odd {background-color: #CCCCFF;}
 table tr.list_line_even {background-color: #9999FF;}
+table tr.list_line_odd_report, table tr.list_line_odd_report td{background-color: #CCCCFF;border:black 1px solid}
+table tr.list_line_even_report, table tr.list_line_even_report td{background-color: #9999FF;border:black 1px solid}
 .new_page_link a, .new_page_link a:link, .new_page_link a:visited{border:white 1px solid;color:#D6D9BA;text-decoration:none;padding-left:6px;padding-top:6px;padding-right:6px;padding-bottom:6px;background-color:#808963;font-size:18px;font-weight:bold;}
 .new_page_link a:hover{text-decoration:none;color:#808963;background-color: #FF99FF;font-size:18px;font-weight:bold;}
 .flashNoticeError {background-color: #F7ACBF;color: #E30940;text-align: center;}
@@ -127,3 +129,4 @@ table tr.list_line_even {background-color: #9999FF;}
 .sort_search_tag a, .sort_search_tag a:visited{background-color:red;color:yellow;font-weight:bold;text-decoration:none;border:white 1px solid}
 .sort_search_tag a:hover{background-color:yellow;color:red}
 .sort_search_tag legend{color:#dfd;font-family:sans-serif;background:#141;padding:0.1em 0.5em;}
+.report_border td{border:black 1px solid}

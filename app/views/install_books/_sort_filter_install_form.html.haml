@@ -1,0 +1,46 @@
+.sort_search_tag
+  %br
+  = form_tag show_sorted_install_path do
+    %table{:border => 0}
+      %tr
+        -# For the time being not implementing sorting...
+        -#%td
+        -#  %fieldset
+        -#    %legend Sort
+        -#    = select :sort_by, :val, @sort_on
+        %td
+          %fieldset
+            %legend Filter Records
+            %table
+              %tr
+                %td
+                  %b Name:
+                  = text_field_tag 'nm', @_nm, :style => "width:80px"
+                %td
+                  &nbsp;
+                  %b Slip/Trans ID:
+                  = text_field_tag 'slp', @_slp, :style => "width:80px"
+                %td
+                  &nbsp;
+                  %b GSK No:
+                  = text_field_tag 'gskno', @_gskno, :style => "width:80px"
+                %td
+                  &nbsp;
+                  %b GSK PIN:
+                  = text_field_tag 'gskpin', @_gskpin, :style => "width:40px"
+                %td
+                  &nbsp;
+                  %b SCN:
+                  = text_field_tag 'scn', @_scn, :style => "width:80px"
+                %td
+                  &nbsp;
+                  %b RCV No:
+                  = text_field_tag 'rcvno', @_rcvno, :style => "width:80px"
+                %td
+                  &nbsp;
+                  %b RCV PIN:
+                  = text_field_tag 'rcvpin', @_rcvpin, :style => "width:40px"
+        %td{:valign => "bottom", :style => "padding-bottom:7px"}
+          &nbsp;
+          = submit_tag ' GO '
+

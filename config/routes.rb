@@ -1,8 +1,9 @@
 Pomtv::Application.routes.draw do
-  resources :install_books
 
-
+  match 'install_books/show_sorted_install' => 'install_books#show_sorted_install', :as => :show_sorted_install
   match 'cust_infs/show_sorted' => 'cust_infs#show_sorted', :as => :show_sorted
+
+  resources :install_books
   resources :cust_infs
 
 
