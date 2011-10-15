@@ -15,31 +15,36 @@
               %tr
                 %td
                   %b Name:
+                %td{:class => 'right_border'}
                   = text_field_tag 'nm', @_nm, :style => "width:80px"
                 %td
-                  &nbsp;
                   %b Slip/Trans ID:
+                %td{:class => 'right_border'}
                   = text_field_tag 'slp', @_slp, :style => "width:80px"
                 %td
-                  &nbsp;
                   %b GSK No:
+                %td{:class => 'right_border'}
                   = text_field_tag 'gskno', @_gskno, :style => "width:80px"
                 %td
-                  &nbsp;
                   %b GSK PIN:
+                %td{:class => 'right_border'}
                   = text_field_tag 'gskpin', @_gskpin, :style => "width:40px"
                 %td
-                  &nbsp;
                   %b SCN:
+                %td{:class => 'right_border'}
                   = text_field_tag 'scn', @_scn, :style => "width:80px"
                 %td
-                  &nbsp;
                   %b RCV No:
+                %td{:class => 'right_border'}
                   = text_field_tag 'rcvno', @_rcvno, :style => "width:80px"
                 %td
-                  &nbsp;
                   %b RCV PIN:
+                %td{:class => 'right_border'}
                   = text_field_tag 'rcvpin', @_rcvpin, :style => "width:40px"
+                %td
+                  %b Installed:
+                %td{:class => 'right_border'}
+                  = select :is_installed, :val, ["NO","YES","ALL"], :selected => @_ins
         %td{:valign => "bottom", :style => "padding-bottom:7px"}
           &nbsp;
           = submit_tag ' GO '

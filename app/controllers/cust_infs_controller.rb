@@ -1,4 +1,6 @@
 class CustInfsController < ApplicationController
+  before_filter :login_required
+
   # GET /cust_infs
   def index
     sort = "cname"

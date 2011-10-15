@@ -1,4 +1,7 @@
 class InstallBooksController < ApplicationController
+  before_filter :login_required
+  #load_and_authorize_resource
+
   # GET /install_books
   def index
     @_nm = ''
@@ -8,7 +11,8 @@ class InstallBooksController < ApplicationController
     @_scn = ''
     @_rcvno = ''
     @_rcvpin = ''
-    @install_books = InstallBook.find(:all, :order => "installed, slip_trans_id", :conditions => ["delete_flag = 0"]).paginate(:page => params[:page], :per_page => 100)
+    @_ins = "NO"
+    @install_books = InstallBook.find(:all, :order => "installed, slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
   end
 
   def show_sorted_install
@@ -19,6 +23,7 @@ class InstallBooksController < ApplicationController
     @_scn= params[:scn]
     @_rcvno= params[:rcvno]
     @_rcvpin= params[:rcvpin]
+    @_ins = params[:is_installed].nil? ? "NO" : (params[:is_installed][:val].nil? ? "ALL" : params[:is_installed][:val])
     cust_qry_array = ["select distinct cust_id from cust_infs where delete_flag = 0"]
     cust_qry_array << "upper(cname) like '#{@_nm.to_s.upcase}%'" if ! @_nm.blank?
     cust_qry = cust_qry_array.join(" and ") + " order by cname "
@@ -30,6 +35,8 @@ class InstallBooksController < ApplicationController
     qry_array << "smartcardno like '#{@_scn}%'" if ! @_scn.blank?
     qry_array << "rcv_no like '#{@_rcvno}%'" if ! @_rcvno.blank?
     qry_array << "rcv_pin like '#{@_rcvpin}%'" if ! @_rcvpin.blank?
+    qry_array << "NOT installed" if @_ins == "NO"
+    qry_array << "installed" if @_ins == "YES"
     qry = qry_array.join(" and ") + " order by installed, slip_trans_id"
     @install_books = InstallBook.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
     render :action => "index"
@@ -117,7 +124,7 @@ class InstallBooksController < ApplicationController
   private
 
   def _fill_bookingfor_list
-    booking_for = ["****No customer found to book****"]
+    booking_for = ["****No customer found for booking****"]
     @cust_list = CustInf.find_by_sql("select * from cust_infs where cust_id not in (select cust_id from install_books where gsk_no is not null and delete_flag = 0) and NOT installed and delete_flag = 0 order by cname")
     @cust_list.length.times do |idx|
       booking_for = ["----Please select the customer----"] if idx == 0

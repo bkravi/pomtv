@@ -3,14 +3,14 @@
 %br
 %table{:border => 0, :cellspacing => 0}
   %tr
-    %td{:colspan => 8, :align => "center", :style => "font-size:15px;padding-bottom:10px"}
+    %td{:colspan => 9, :align => "center", :style => "font-size:15px;padding-bottom:10px"}
       %b Report To Be Sent To Reliance For New Customer Installation
-    %td{:align => "center"}
-      - if ! @install_book[0].nil?
-        = form_tag save_reliance_path,:controller => "utilities", :method => 'post' do
-          = submit_tag ' Save ', :title => "Save as Excel file"
-      - else
-        = button_to(' Save ', {}, :disabled => true)
+      .flt_rt{:style => "float:right"}
+        - if ! @install_book[0].nil?
+          = form_tag save_reliance_path,:controller => "utilities", :method => 'post' do
+            = submit_tag ' Save ', :title => "Save as Excel file"
+        - else
+          = button_to(' Save ', {}, :disabled => true)
   %tr{:style => "font-weight:bold;background-color: blue;color:white;", :class => "report_border"}
     %td Slip/Trans ID
     %td GSK NO

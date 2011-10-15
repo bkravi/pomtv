@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(:version => 20111011171354) do
     t.integer  "delete_flag",   :default => 0
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "rolename"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "statecity", :force => true do |t|
     t.string   "state"
     t.string   "city"
@@ -62,5 +68,23 @@ ActiveRecord::Schema.define(:version => 20111011171354) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users_roles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_roles", ["role_id"], :name => "index_users_roles_on_role_id"
+  add_index "users_roles", ["user_id"], :name => "index_users_roles_on_user_id"
 
 end

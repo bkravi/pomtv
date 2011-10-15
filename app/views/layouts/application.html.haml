@@ -6,13 +6,20 @@
     = javascript_include_tag 'jquery', 'jquery_ujs', 'jquery-ui', 'custom', 'common'
     = csrf_meta_tag
   %body
-    %img.marginlttp{:border => "0", :src => "/images/pomtv_header_1.png", :height => 80}/
-    #navigation
-      = render_navigation
-    %p.hrule
-    - swamaan = SwamaanList.find(:first, :conditions => ["swamaan_id = ?", rand(SwamaanList.count)+1])
-    - swamaan = swamaan.nil? ? "Mein Maya Jeet Jagat Jeet Aatma Hun" : swamaan.swamaan
-    %marquee.marque{:scrollamount => 5} 
-      = "SWAMAAN: " + swamaan
-    #contentBodynew
-      = yield
+    - if current_user
+      %img.marginlttp{:border => "0", :src => "/images/pomtv_header_1.png", :height => 80}/
+      %table{:class => 'currentuser'}
+        %tr
+          %td
+            = " Hi #{current_user.username.humanize} |"
+          %td
+            = link_to "Logout", logout_path(current_user), :style => "color:#E50A38;"
+      #navigation
+        = render_navigation
+      %p.hrule
+      - swamaan = SwamaanList.find(:first, :conditions => ["swamaan_id = ?", rand(SwamaanList.count)+1])
+      - swamaan = swamaan.nil? ? "Mein Maya Jeet Jagat Jeet Aatma Hun" : swamaan.swamaan
+      %marquee.marque{:scrollamount => 5} 
+        = "SWAMAAN: " + swamaan
+      #contentBodynew
+        = yield

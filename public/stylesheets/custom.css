@@ -107,7 +107,7 @@ ul.navigation li {
 .bold{font-weight:bold;font-family: Arial, sans-serif;}
 .mid_bg_add{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 250px;width: 800px;}
 .mid_bg_add_bigger{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 5px;width: "100%";}
-.mid_bg_add_booking{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:70px;width: "100%";}
+.mid_bg_add_booking{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:20px;width: "100%";}
 .mid_bg_add_utilities{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:150px;width: "100%";}*/
 .note{color:red;font-size:12px;font-style:italic;}
 table tr.list_line_odd {background-color: #CCCCFF;}
@@ -115,7 +115,7 @@ table tr.list_line_even {background-color: #9999FF;}
 table tr.list_line_odd_report, table tr.list_line_odd_report td{background-color: #CCCCFF;border:black 1px solid}
 table tr.list_line_even_report, table tr.list_line_even_report td{background-color: #9999FF;border:black 1px solid}
 .new_page_link a, .new_page_link a:link, .new_page_link a:visited{border:white 1px solid;color:#D6D9BA;text-decoration:none;padding-left:6px;padding-top:6px;padding-right:6px;padding-bottom:6px;background-color:#808963;font-size:18px;font-weight:bold;}
-.new_page_link a:hover{text-decoration:none;color:#808963;background-color: #FF99FF;font-size:18px;font-weight:bold;}
+.new_page_link a:hover{opacity:0.4;}
 .flashNoticeError {background-color: #F7ACBF;color: #E30940;text-align: center;}
 .flashNoticeNoError {background-color: #AAFF7F;color: green;text-align: center;}
 .paginate_ss{font-size:12px;margin-left:2px;margin-top:2px;margin-bottom:2px}
@@ -129,4 +129,9 @@ table tr.list_line_even_report, table tr.list_line_even_report td{background-col
 .sort_search_tag a, .sort_search_tag a:visited{background-color:red;color:yellow;font-weight:bold;text-decoration:none;border:white 1px solid}
 .sort_search_tag a:hover{background-color:yellow;color:red}
 .sort_search_tag legend{color:#dfd;font-family:sans-serif;background:#141;padding:0.1em 0.5em;}
+.right_border{border-right:black 2px solid}
 .report_border td{border:black 1px solid}
+.newlogin{background:url(../images/login_lock_strip.png) left top repeat-x; border:#0CD9DC 3px solid;border-radius:1px;margin-top:5px; margin-left:350px;width: 565px; height:300px;padding: 0px;}
+.login_error_pos{margin-top:20px; margin-left:350px;width: 565px;padding: 0px;}
+.text_feld_area_login_page{width:215px; height:22px; color:blue;background-color:#D2DCE5; border:#7E7E7E 1px solid;border-radius:5px; padding-left:10px; line-height:22px;}
+.currentuser{text-decoration:none;font-family: Arial, sans-serif;font-weight:bold;color:#E50A38;position:absolute;left:15px;top:15px}
