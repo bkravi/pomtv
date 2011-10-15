@@ -1,5 +1,6 @@
+require 'spreadsheet'
 class UtilitiesController < ApplicationController
-  require 'spreadsheet'
+  before_filter :login_required
 
   def send_to_reliance
     @utilities = @install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 20)

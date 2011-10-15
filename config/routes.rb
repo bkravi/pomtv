@@ -1,5 +1,11 @@
 Pomtv::Application.routes.draw do
 
+  match 'user_sessions/new' => 'user_sessions#new', :as => :login
+  match 'user_sessions/logout/:id' => 'user_sessions#logout', :as => :logout
+
+  resources :users
+  resources :user_sessions
+
   match 'install_books/show_sorted_install' => 'install_books#show_sorted_install', :as => :show_sorted_install
   match 'cust_infs/show_sorted' => 'cust_infs#show_sorted', :as => :show_sorted
 
@@ -62,7 +68,8 @@ Pomtv::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "cust_infs#index"
+  root :to => "user_sessions#new"
+  #root :to => "cust_infs#index"
 
   # See how all your routes lay out with "rake routes"
 
