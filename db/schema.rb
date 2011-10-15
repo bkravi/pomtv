@@ -75,6 +75,10 @@ ActiveRecord::Schema.define(:version => 20111011171354) do
     t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role_id"
+    t.string   "email"
+    t.string   "persistence_token"
+    t.integer  "roles_mask"
   end
 
   create_table "users_roles", :force => true do |t|
