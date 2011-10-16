@@ -29,7 +29,7 @@ class UtilitiesController < ApplicationController
     @_ins = params[:ins].nil? ? "NO" : (params[:ins][:val].nil? ? "NO" : params[:ins][:val])
     qry << " and cust_infs.installed " if @_ins == "YES"
     qry << " and not cust_infs.installed " if @_ins == "NO"
-    qry << " and MONTH(date_of_reg) = #{month_no_of(@_mon)} "
+    qry << " and EXTRACT(MONTH from date_of_reg) = #{month_no_of(@_mon)} "
     qry += " order by date_of_reg "
     @final_query = qry
     @utilities = @rec = CustInf.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
