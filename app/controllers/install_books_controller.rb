@@ -12,7 +12,7 @@ class InstallBooksController < ApplicationController
     @_rcvno = ''
     @_rcvpin = ''
     @_ins = "NO"
-    @install_books = InstallBook.find(:all, :order => "installed, slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
+    @install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
   end
 
   def show_sorted_install
@@ -37,7 +37,7 @@ class InstallBooksController < ApplicationController
     qry_array << "rcv_pin like '#{@_rcvpin}%'" if ! @_rcvpin.blank?
     qry_array << "NOT installed" if @_ins == "NO"
     qry_array << "installed" if @_ins == "YES"
-    qry = qry_array.join(" and ") + " order by installed, slip_trans_id"
+    qry = qry_array.join(" and ") + " order by cust_id desc "
     @install_books = InstallBook.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
     render :action => "index"
     #render :text => qry_array
@@ -97,7 +97,7 @@ class InstallBooksController < ApplicationController
     @install_book.rcv_pin = params[:install_book][:rcv_pin]
     @install_book.remarks = params[:install_book][:remarks]
     if params[:install_book][:smartcardno].nil? || params[:install_book][:smartcardno].blank? || params[:install_book][:rcv_no].nil? || params[:install_book][:rcv_no].blank? || params[:install_book][:rcv_pin].nil? || params[:install_book][:rcv_pin].blank?
-      flash[:notice] = "#ERROR#Neither of the Smartcard No, RCV Pin, RCV No can be blank"
+      flash[:notice] = "#ERROR#Neither of the Smart Card NO, RCV NO, RCV PIN can be blank"
       render :action => "edit"
     else
       if @install_book.update_attributes(params[:install_book])

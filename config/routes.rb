@@ -20,6 +20,9 @@ Pomtv::Application.routes.draw do
 
   match 'utilities/save_reliance' => 'utilities#save_reliance', :as => :save_reliance
   match 'utilities/send_to_reliance' => 'utilities#send_to_reliance', :as => :send_to_reliance
+  match 'utilities/monthly_report' => 'utilities#monthly_report', :as => :monthly_report
+  match 'utilities/daterange_report' => 'utilities#daterange_report', :as => :daterange_report
+  match 'utilities/save_report' => 'utilities#save_report', :as => :save_report
   resources :utilities  # must be after 'match'. So that Rail's RESTful be at a lower priority than the custom path
 
   # Sample of regular route:

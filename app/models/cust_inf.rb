@@ -12,6 +12,11 @@ class CustInf < ActiveRecord::Base
     self.installed = (self.installed.nil? || self.installed.blank?) ? 0 : self.installed  ## Will assign when RCV is done
   end
 
+  def validate
+    errors.add_to_base("Alt contact no. is not a number") if (alt_con_no.to_i == 0 && !alt_con_no.blank?)
+    errors.add_to_base("Smart Card# is not a number") if (smartcardno.to_i == 0 && !smartcardno.blank?)
+  end
+
   validates :cname, :presence => true
   validates :contact_no, :presence => true, :numericality => true
   validates :address, :presence => true
