@@ -26,7 +26,7 @@ class InstallBooksController < ApplicationController
     @_ins = params[:is_installed].nil? ? "NO" : (params[:is_installed][:val].nil? ? "ALL" : params[:is_installed][:val])
     cust_qry_array = ["select distinct cust_id from cust_infs where delete_flag = 0"]
     cust_qry_array << "upper(cname) like '#{@_nm.to_s.upcase}%'" if ! @_nm.blank?
-    cust_qry = cust_qry_array.join(" and ") + " order by cname "
+    cust_qry = cust_qry_array.join(" and ")
     
     qry_array = ["select * from install_books where delete_flag = 0 and cust_id in (#{cust_qry})"]
     qry_array << "upper(slip_trans_id) like '#{@_slp.to_s.upcase}%'" if ! @_slp.blank?
