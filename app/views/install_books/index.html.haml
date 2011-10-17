@@ -25,36 +25,41 @@
         %td Installed
         %td Remarks
         %td{:align => "center"} Action
-      - @install_books.each do |install_book|
-        %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
-          %td= install_book.cust_id
-          %td{:style => "white-space: nowrap;"}
-            = install_book.cust_inf.cname
-          %td{:style => "white-space: nowrap;"}
-            = install_book.cust_inf.contact_no
-          %td{:style => "white-space: nowrap;"}
-            = install_book.cust_inf.city
-          %td{:style => "white-space: nowrap;"}
-            = install_book.slip_trans_id
-          %td{:style => "white-space: nowrap;"}
-            = install_book.gsk_no
-          %td{:style => "white-space: nowrap;"}
-            = install_book.gsk_pin
-          %td{:style => "white-space: nowrap;"}
-            = (install_book.smartcardno.nil? || install_book.smartcardno.blank?) ?  "N/A" : install_book.smartcardno
-          %td{:style => "white-space: nowrap;"}
-            = (install_book.rcv_no.nil? || install_book.rcv_no.blank?) ?  "N/A" : install_book.rcv_no
-          %td{:style => "white-space: nowrap;"}
-            = (install_book.rcv_pin.nil? || install_book.rcv_pin.blank?) ?  "N/A" : install_book.rcv_pin
-          %td
-            = install_book.installed ? "YES" : "NO"
-          %td
-            = (install_book.remarks.nil? || install_book.remarks.blank?) ?  "N/A" : install_book.remarks
-          %td{:align => "center"}
-            - if install_book.rcv_no.nil?
-              = link_to image_tag('reliance_recharge.png',:title => 'Click to provide recharge voucher to customer'), edit_install_book_path(install_book.id)
-            - else
-              = image_tag('reliance_recharge_disable.png', :title => 'Recharge voucher already sent to customer')
+      - if ! @install_books[0].nil?
+        - @install_books.each do |install_book|
+          %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
+            %td= install_book.cust_id
+            %td{:style => "white-space: nowrap;"}
+              = install_book.cust_inf.cname
+            %td{:style => "white-space: nowrap;"}
+              = install_book.cust_inf.contact_no
+            %td{:style => "white-space: nowrap;"}
+              = install_book.cust_inf.city
+            %td{:style => "white-space: nowrap;"}
+              = install_book.slip_trans_id
+            %td{:style => "white-space: nowrap;"}
+              = install_book.gsk_no
+            %td{:style => "white-space: nowrap;"}
+              = install_book.gsk_pin
+            %td{:style => "white-space: nowrap;"}
+              = (install_book.smartcardno.nil? || install_book.smartcardno.blank?) ?  "N/A" : install_book.smartcardno
+            %td{:style => "white-space: nowrap;"}
+              = (install_book.rcv_no.nil? || install_book.rcv_no.blank?) ?  "N/A" : install_book.rcv_no
+            %td{:style => "white-space: nowrap;"}
+              = (install_book.rcv_pin.nil? || install_book.rcv_pin.blank?) ?  "N/A" : install_book.rcv_pin
+            %td
+              = install_book.installed ? "YES" : "NO"
+            %td
+              = (install_book.remarks.nil? || install_book.remarks.blank?) ?  "N/A" : install_book.remarks
+            %td{:align => "center"}
+              - if install_book.rcv_no.nil?
+                = link_to image_tag('reliance_recharge.png',:title => 'Click to provide recharge voucher to customer'), edit_install_book_path(install_book.id)
+              - else
+                = image_tag('reliance_recharge_disable.png', :title => 'Recharge voucher already sent to customer')
+      - else
+        %tr
+          %td{:colspan => 16, :align => "center", :style => "color:black;background-color:#CCFFFF", :width => "1200px"} 
+            %b No Record Found !!!        
   .paginate_ss
     %br
     = will_paginate

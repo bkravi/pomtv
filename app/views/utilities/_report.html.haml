@@ -33,7 +33,7 @@
       %td
         = rec.city
       %td{:style => "white-space: nowrap;"}
-        = rec.slip_trans_id
+        = rec.slip_no||rec.trans_id
       %td{:style => "white-space: nowrap;"}
         = rec.date_of_reg.strftime('%d-%b-%y')
       %td

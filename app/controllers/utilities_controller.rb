@@ -24,7 +24,7 @@ class UtilitiesController < ApplicationController
   end
 
   def monthly_report
-    qry = "select * from cust_infs,install_books where cust_infs.cust_id=install_books.cust_id and cust_infs.delete_flag=0 and install_books.delete_flag=0"
+    qry = "select * from install_books RIGHT OUTER JOIN cust_infs ON(cust_infs.cust_id=install_books.cust_id) where cust_infs.delete_flag=0 and (install_books.delete_flag=0 OR install_books.delete_flag is NULL)"
     @_mon = params[:mon].nil? ? "#{Time.now.strftime('%B')}" : (params[:mon][:val].nil? ? "#{Time.now.strftime('%B')}" : params[:mon][:val])
     @_ins = params[:ins].nil? ? "NO" : (params[:ins][:val].nil? ? "NO" : params[:ins][:val])
     qry << " and cust_infs.installed " if @_ins == "YES"
@@ -34,11 +34,12 @@ class UtilitiesController < ApplicationController
     @final_query = qry
     @utilities = @rec = CustInf.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
     render :layout => "reportlayout"
+    #render :text => qry
   end
 
   def daterange_report
     flash[:notice] = nil
-    qry = "select * from cust_infs,install_books where cust_infs.cust_id=install_books.cust_id and cust_infs.delete_flag=0 and install_books.delete_flag=0"
+    qry = "select * from install_books RIGHT OUTER JOIN cust_infs ON(cust_infs.cust_id=install_books.cust_id) where cust_infs.delete_flag=0 and (install_books.delete_flag=0 OR install_books.delete_flag is NULL)"
     @_st_dt = (params[:st_dt].nil? || params[:st_dt].blank?) ? (Time.now-5*24*60*60).strftime('%Y/%m/%d') : params[:st_dt]
     @_end_dt = (params[:end_dt].nil? || params[:end_dt].blank?) ? Time.now.strftime('%Y/%m/%d') : params[:end_dt]
     @_ins = params[:ins].nil? ? "NO" : (params[:ins][:val].nil? ? "NO" : params[:ins][:val])
