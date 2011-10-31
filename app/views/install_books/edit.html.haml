@@ -59,6 +59,6 @@
             %hr{:style => "height:4px;background-color:#D6D9BA"}
         %tr
           %td{:colspan => 2, :align => "right"}
-            = f.submit ' Apply recharge voucher ', :title => 'Click to assign recharge voucher to customer'
+            = f.submit ' Apply recharge voucher ', :disable_with => ' Apply recharge voucher ', :title => 'Click to assign recharge voucher to customer'
           %td{:colspan => 2, :align => "left"}
             = link_to button_to(' Cancel '), install_books_path, :method => "get", :title => "Cancel recharging customer"
