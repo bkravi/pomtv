@@ -10,7 +10,8 @@ class CustInfsController < ApplicationController
     @_st= ''
     @_ins = "NO"
     @sort_on = ["Id: Asc","Id: Desc","Name: Asc","Name: Desc","Address: Asc", "Address: Desc", "State: Asc","State: Desc","City: Asc","City: Desc","Reg Date: Asc","Reg Date: Desc","SCN: Asc","SCN: Desc","Installed: Asc","Installed: Desc" ]
-    @cust_infs = CustInf.find(:all, :order => "id desc", :conditions => ["delete_flag = 0 and not installed"]).paginate :page => params[:page], :per_page => 100
+    #@cust_infs = CustInf.find(:all, :order => "id desc", :conditions => ["delete_flag = 0 and not installed"]).paginate :page => params[:page], :per_page => 100
+    @cust_infs = CustInf.find(:all, :order => "id desc", :conditions => ["delete_flag = 0 and not installed"])
   end
 
   def show_sorted
@@ -50,7 +51,8 @@ class CustInfsController < ApplicationController
     qry_array << "NOT installed" if @_ins == "NO"
     qry_array << "installed" if @_ins == "YES"
     qry = qry_array.join(" and ") + " order by id desc "
-    @cust_infs = CustInf.find_by_sql(qry).paginate :page => params[:page], :per_page => 100, :order => "#{sort}"
+    #@cust_infs = CustInf.find_by_sql(qry).paginate :page => params[:page], :per_page => 100, :order => "#{sort}"
+    @cust_infs = CustInf.find_by_sql(qry)
     render :action => "index"
     #render :text => qry
   end

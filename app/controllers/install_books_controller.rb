@@ -12,7 +12,8 @@ class InstallBooksController < ApplicationController
     @_rcvno = ''
     @_rcvpin = ''
     @_ins = "NO"
-    @install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
+    #@install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
+    @install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"])
   end
 
   def show_sorted_install
@@ -38,7 +39,8 @@ class InstallBooksController < ApplicationController
     qry_array << "NOT installed" if @_ins == "NO"
     qry_array << "installed" if @_ins == "YES"
     qry = qry_array.join(" and ") + " order by cust_id desc "
-    @install_books = InstallBook.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
+    #@install_books = InstallBook.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
+    @install_books = InstallBook.find_by_sql(qry)
     render :action => "index"
     #render :text => qry_array
   end

@@ -1,7 +1,7 @@
 %div{:class=>"mid_bg_add_bigger"}
   = render "shared/flash_messages"
-  .paginate_ss
-    = will_paginate
+  -#.paginate_ss
+    -#= will_paginate
   = render 'sort_filter_cust_form'
   .row_hover
     %table{:border => 0}
@@ -70,6 +70,6 @@
         %tr
           %td{:colspan => 16, :align => "center", :style => "color:black;background-color:#CCFFFF"} 
             %b No Record Found !!!        
-  .paginate_ss
-    %br
-    = will_paginate
+  -#.paginate_ss
+    -#%br
+    -#= will_paginate
