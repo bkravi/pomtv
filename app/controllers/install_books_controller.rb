@@ -12,8 +12,8 @@ class InstallBooksController < ApplicationController
     @_rcvno = ''
     @_rcvpin = ''
     @_ins = "NO"
-    #@install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
-    @install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"])
+    @install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
+    #@install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"])
   end
 
   def show_sorted_install
@@ -24,7 +24,11 @@ class InstallBooksController < ApplicationController
     @_scn= params[:scn]
     @_rcvno= params[:rcvno]
     @_rcvpin= params[:rcvpin]
-    @_ins = params[:is_installed].nil? ? "NO" : (params[:is_installed][:val].nil? ? "ALL" : params[:is_installed][:val])
+    if ! params[:is_installed_val].nil?
+      @_ins = params[:is_installed_val]
+    else
+      @_ins = params[:is_installed].nil? ? "NO" : (params[:is_installed][:val].nil? ? "ALL" : params[:is_installed][:val])
+    end
     cust_qry_array = ["select distinct cust_id from cust_infs where delete_flag = 0"]
     cust_qry_array << "upper(cname) like '#{@_nm.to_s.upcase}%'" if ! @_nm.blank?
     cust_qry = cust_qry_array.join(" and ")
@@ -39,8 +43,8 @@ class InstallBooksController < ApplicationController
     qry_array << "NOT installed" if @_ins == "NO"
     qry_array << "installed" if @_ins == "YES"
     qry = qry_array.join(" and ") + " order by cust_id desc "
-    #@install_books = InstallBook.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
-    @install_books = InstallBook.find_by_sql(qry)
+    @install_books = InstallBook.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
+    #@install_books = InstallBook.find_by_sql(qry)
     render :action => "index"
     #render :text => qry_array
   end
