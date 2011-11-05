@@ -59,19 +59,20 @@
             = f.label :state, 'State**'
           - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td
-              = f.text_field :state, :class => 'text_feld_area', :disabled => true
+              = f.text_field :state, :class => 'text_feld_area'
           - else
             %td
               = select :cust_inf, :state, @state_list
           %td
             = f.label :city, 'City**'
-          - if @controller.action_name == 'edit' || @controller.action_name == 'update'
-            %td
-              = f.text_field :city, :class => 'text_feld_area', :disabled => true
-          - else
-            %td
+          %td
+            = f.text_field :city, :class => 'text_feld_area'
+          -#- if @controller.action_name == 'edit' || @controller.action_name == 'update'
+            -#%td
+              -#= f.text_field :city, :class => 'text_feld_area', :disabled => true
+          -#- else
+            -#%td
               -#= select :cust_inf, :city, @city_list -#Using textfield for the city inlieu of dropdown list
-              = f.text_field :city, :class => 'text_feld_area'
         %tr
           %td
             = f.label :pincode, 'Pincode**'
