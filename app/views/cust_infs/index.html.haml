@@ -49,7 +49,7 @@
             %td
               = cust_inf.pincode 
             %td{:style => "white-space: nowrap;"}
-              = cust_inf.date_of_reg.strftime('%d-%b-%y') 
+              = (cust_inf.date_of_reg.nil?) ? "N/A" : cust_inf.date_of_reg.strftime('%d-%b-%y') 
             %td
               = cust_inf.amount.to_i 
             %td{:style => "white-space: nowrap;"}

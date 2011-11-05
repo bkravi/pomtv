@@ -70,7 +70,8 @@
               = f.text_field :city, :class => 'text_feld_area', :disabled => true
           - else
             %td
-              = select :cust_inf, :city, @city_list
+              -#= select :cust_inf, :city, @city_list -#Using textfield for the city inlieu of dropdown list
+              = f.text_field :city, :class => 'text_feld_area'
         %tr
           %td
             = f.label :pincode, 'Pincode**'
