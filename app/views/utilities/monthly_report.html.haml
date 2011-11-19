@@ -1,11 +1,5 @@
 .paginate_ss
   = will_paginate :params => {:mon_val => @_mon, :ins_val => @_ins}
-<<<<<<< HEAD
-=======
-  .num_recs{:style => "color:green"} 
-    %b
-      = "Total Records Found: #{@tot_rec}"
->>>>>>> c8301b3dfee1305f1616b29a12da6d78276e49f6
 %br
 = form_tag monthly_report_path do
   %table

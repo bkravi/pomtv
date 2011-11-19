@@ -4,7 +4,6 @@ class UtilitiesController < ApplicationController
 
   def send_to_reliance
     @utilities = @install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
-    @tot_rec = InstallBook.count(:conditions => ["delete_flag = 0 and NOT installed"])
     #@utilities = @install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"])
     render :layout => "reportlayout"
   end
@@ -41,10 +40,8 @@ class UtilitiesController < ApplicationController
     qry << " and not cust_infs.installed " if @_ins == "NO"
     qry << " and EXTRACT(MONTH from date_of_reg) = #{month_no_of(@_mon)} "
     qry += " order by date_of_reg "
-    count_qry = qry.gsub("select *","select count(*)")
     @final_query = qry
     @utilities = @rec = CustInf.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
-    @tot_rec = CustInf.count_by_sql(count_qry)
     #@utilities = @rec = CustInf.find_by_sql(qry)
     render :layout => "reportlayout"
     #render :text => qry
@@ -72,10 +69,8 @@ class UtilitiesController < ApplicationController
     qry << " and cust_infs.installed " if @_ins == "YES"
     qry << " and not cust_infs.installed " if @_ins == "NO"
     qry += " order by date_of_reg "
-    count_qry = qry.gsub("select *","select count(*)")
     @final_query = qry
     @utilities = @rec = CustInf.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
-    @tot_rec = CustInf.count_by_sql(count_qry)
     #@utilities = @rec = CustInf.find_by_sql(qry)
     ## Check the validity of start/end dates
     if @_st_dt > @_end_dt
