@@ -1,0 +1,35 @@
+.paginate_ss
+  = will_paginate :params => {:mon_val => @_mon, :ins_val => @_ins}
+%br
+= form_tag monthly_report_path do
+  %table
+    %tr
+      %td
+        &nbsp;
+        %b Choose Month
+      %td
+        = select :mon, :val, MONTH_LIST, :selected => @_mon
+      %td
+        &nbsp;
+        %b Installed
+      %td
+        = select :ins, :val, ["NO","YES","ALL"], :selected => @_ins
+      %td
+        &nbsp;
+        = submit_tag ' GO '
+%table{:border => 0, :cellspacing => 0}
+  %tr
+    %td{:colspan => 16, :align => "center", :style => "font-size:15px;padding-bottom:10px"}
+      %b Monthwise Registration Details
+      .flt_rt{:style => "float:right"}
+        - if ! @rec[0].nil?
+          = form_tag save_report_path,:controller => "utilities", :method => 'post' do
+            = hidden_field_tag :qry, :val, :value => @final_query, :size => 1
+            = hidden_field_tag :hidden_month, :val, :value => @_mon, :size => 1
+            = submit_tag ' Export To Excel ', :title => "Save as Excel file"
+        - else
+          = button_to(' Export To Excel ', {}, :disabled => true)
+  = render 'report'
+%br
+.paginate_ss
+  = will_paginate :params => {:mon_val => @_mon, :ins_val => @_ins}
