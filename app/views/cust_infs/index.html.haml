@@ -1,7 +1,10 @@
 %div{:class=>"mid_bg_add_bigger"}
   = render "shared/flash_messages"
   .paginate_ss
-    = will_paginate
+    = will_paginate :params => {:cont=>@_cont,:nm=>@_nm,:add=>@_add,:st=>@_st,:is_installed_val=>@_ins}
+    .num_recs{:style => "color:green"} 
+      %b
+        = "Total Records Found: #{@tot_rec}"
   = render 'sort_filter_cust_form'
   .row_hover
     %table{:border => 0}
@@ -27,44 +30,49 @@
         %td Installed
         %td{:width => "150px"} Remarks
         %td{:colspan => 2, :align => "center"} Action
-      - @cust_infs.each do |cust_inf|
-        %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
-          %td
-            = cust_inf.cust_id
-          %td{:style => "white-space: nowrap;"}
-            = cust_inf.slip_no || cust_inf.trans_id
-          %td
-            = cust_inf.cname 
-          %td
-            = cust_inf.contact_no 
-          %td
-            = (cust_inf.alt_con_no.nil? || cust_inf.alt_con_no.blank?) ?  "N/A" : cust_inf.alt_con_no
-          %td
-            = cust_inf.address 
-          %td
-            = cust_inf.state 
-          %td
-            = cust_inf.city 
-          %td
-            = cust_inf.pincode 
-          %td{:style => "white-space: nowrap;"}
-            = cust_inf.date_of_reg.strftime('%d-%b-%y') 
-          %td
-            = cust_inf.amount.to_i 
-          %td{:style => "white-space: nowrap;"}
-            = (cust_inf.smartcardno.nil? || cust_inf.smartcardno.blank?) ?  "N/A" : cust_inf.smartcardno
-          %td
-            = cust_inf.installed == true ? "YES" : "NO" 
-          %td
-            = (cust_inf.remarks.nil? || cust_inf.remarks.blank?) ?  "N/A" : cust_inf.remarks
-          - if ! cust_inf.installed
+      - if ! @cust_infs[0].nil?
+        - @cust_infs.each do |cust_inf|
+          %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
+            %td
+              = cust_inf.cust_id
+            %td{:style => "white-space: nowrap;"}
+              = cust_inf.slip_no || cust_inf.trans_id
+            %td
+              = cust_inf.cname 
+            %td
+              = cust_inf.contact_no 
+            %td
+              = (cust_inf.alt_con_no.nil? || cust_inf.alt_con_no.blank?) ?  "N/A" : cust_inf.alt_con_no
+            %td
+              = cust_inf.address 
+            %td
+              = cust_inf.state 
+            %td
+              = cust_inf.city 
+            %td
+              = cust_inf.pincode 
+            %td{:style => "white-space: nowrap;"}
+              = (cust_inf.date_of_reg.nil?) ? "N/A" : cust_inf.date_of_reg.strftime('%d-%b-%y') 
+            %td
+              = cust_inf.amount.to_i 
+            %td{:style => "white-space: nowrap;"}
+              = (cust_inf.smartcardno.nil? || cust_inf.smartcardno.blank?) ?  "N/A" : cust_inf.smartcardno
+            %td
+              = cust_inf.installed == true ? "YES" : "NO" 
+            %td
+              = (cust_inf.remarks.nil? || cust_inf.remarks.blank?) ?  "N/A" : cust_inf.remarks
+            - if ! cust_inf.installed
+              %td{:align => "center"}
+                = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.cname}'", :style => "border:none"), edit_cust_inf_path(cust_inf.id)
+            - else
+              %td{:align => "center"}
+                = image_tag('edit_disable.png',:title => "Installation already done so no edit allow !!")
             %td{:align => "center"}
-              = link_to image_tag('edit.png',:title => "Edit '#{cust_inf.cname}'", :style => "border:none"), edit_cust_inf_path(cust_inf.id)
-          - else
-            %td{:align => "center"}
-              = image_tag('edit_disable.png',:title => "Installation already done so no edit allow !!")
-          %td{:align => "center"}
-            = link_to image_tag('delete.png',:title => "Delete '#{cust_inf.cname}'", :style => "border:none"), cust_inf, :confirm => "Are you sure to delete #{cust_inf.cname}?", :method => :delete
+              = link_to image_tag('delete.png',:title => "Delete '#{cust_inf.cname}'", :style => "border:none"), cust_inf, :confirm => "Are you sure to delete #{cust_inf.cname}?", :method => :delete
+      - else
+        %tr
+          %td{:colspan => 16, :align => "center", :style => "color:black;background-color:#CCFFFF"} 
+            %b No Record Found !!!        
   .paginate_ss
     %br
-    = will_paginate
+    = will_paginate :params => {:cont=>@_cont,:nm=>@_nm,:add=>@_add,:st=>@_st,:is_installed_val=>@_ins}

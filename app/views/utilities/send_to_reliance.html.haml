@@ -1,5 +1,8 @@
 .paginate_ss
   = will_paginate
+  .num_recs{:style => "color:green"} 
+    %b
+      = "Total Records Found: #{@tot_rec}"
 %br
 %table{:border => 0, :cellspacing => 0}
   %tr
@@ -8,9 +11,9 @@
       .flt_rt{:style => "float:right"}
         - if ! @install_book[0].nil?
           = form_tag save_reliance_path,:controller => "utilities", :method => 'post' do
-            = submit_tag ' Save ', :title => "Save as Excel file"
+            = submit_tag ' Export To Excel ', :title => "Save as Excel file"
         - else
-          = button_to(' Save ', {}, :disabled => true)
+          = button_to(' Export To Excel ', {}, :disabled => true)
   %tr{:style => "font-weight:bold;background-color: blue;color:white;", :class => "report_border"}
     %td Slip/Trans ID
     %td GSK NO
@@ -21,26 +24,31 @@
     %td Address
     %td State
     %td City
-  - @install_book.each do |install_book|
-    %tr.datarow{:class => cycle('list_line_odd_report','list_line_even_report')}
-      %td
-        = install_book.slip_trans_id
-      %td
-        = install_book.gsk_no
-      %td
-        = install_book.gsk_pin
-      %td
-        = install_book.cust_inf.cname
-      %td
-        = install_book.cust_inf.contact_no
-      %td
-        = install_book.cust_inf.alt_con_no || "N/A"
-      %td
-        = install_book.cust_inf.address
-      %td
-        = install_book.cust_inf.state
-      %td
-        = install_book.cust_inf.city
+  - if ! @install_book[0].nil? 
+    - @install_book.each do |install_book|
+      %tr.datarow{:class => cycle('list_line_odd_report','list_line_even_report')}
+        %td
+          = install_book.slip_trans_id
+        %td
+          = install_book.gsk_no
+        %td
+          = install_book.gsk_pin
+        %td
+          = install_book.cust_inf.cname
+        %td
+          = install_book.cust_inf.contact_no
+        %td
+          = install_book.cust_inf.alt_con_no || "N/A"
+        %td
+          = install_book.cust_inf.address
+        %td
+          = install_book.cust_inf.state
+        %td
+          = install_book.cust_inf.city
+  - else
+    %tr
+      %td{:colspan => 9, :align => "center", :style => "color:black;background-color:#CCFFFF"} 
+        %b No Record Found !!!
 %br
 .paginate_ss
   = will_paginate

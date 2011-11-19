@@ -59,18 +59,20 @@
             = f.label :state, 'State**'
           - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td
-              = f.text_field :state, :class => 'text_feld_area', :disabled => true
+              = f.text_field :state, :class => 'text_feld_area'
           - else
             %td
               = select :cust_inf, :state, @state_list
           %td
             = f.label :city, 'City**'
-          - if @controller.action_name == 'edit' || @controller.action_name == 'update'
-            %td
-              = f.text_field :city, :class => 'text_feld_area', :disabled => true
-          - else
-            %td
-              = select :cust_inf, :city, @city_list
+          %td
+            = f.text_field :city, :class => 'text_feld_area'
+          -#- if @controller.action_name == 'edit' || @controller.action_name == 'update'
+            -#%td
+              -#= f.text_field :city, :class => 'text_feld_area', :disabled => true
+          -#- else
+            -#%td
+              -#= select :cust_inf, :city, @city_list -#Using textfield for the city inlieu of dropdown list
         %tr
           %td
             = f.label :pincode, 'Pincode**'
@@ -80,13 +82,13 @@
         %tr
           - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td{:colspan => 2, :align => "right"}
-              = f.submit ' Update ', :title => "Update and go back to main page"
+              = f.submit ' Update ', :disable_with => ' Update ', :title => "Update and go back to main page"
             %td{:colspan => "2",:align=>"left"}
               = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel registering customer"
           - else  
             %td{:colspan => 3, :align => "right"}
-              = f.submit ' Save and Exit ', :name => "save", :title => "Save and go back to main page"
+              = f.submit ' Save and Exit ', :disable_with => ' Save and Exit ', :name => "save", :title => "Save and go back to main page"
               &nbsp;
-              = f.submit ' Save and Continue ', :name => "cont", :title => "Save and continue to register another customer"
+              = f.submit ' Save and Continue ', :disable_with => ' Save and Continue ', :name => "cont", :title => "Save and continue to register another customer"
             %td{:colspan => "1",:align=>"left"}
               = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel registering customer"

@@ -12,7 +12,9 @@ class InstallBooksController < ApplicationController
     @_rcvno = ''
     @_rcvpin = ''
     @_ins = "NO"
-    @install_books = InstallBook.find(:all, :order => "installed, slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
+    @install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
+    @tot_rec = InstallBook.count(:conditions => ["delete_flag = 0 and NOT installed"])
+    #@install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"])
   end
 
   def show_sorted_install
@@ -23,10 +25,14 @@ class InstallBooksController < ApplicationController
     @_scn= params[:scn]
     @_rcvno= params[:rcvno]
     @_rcvpin= params[:rcvpin]
-    @_ins = params[:is_installed].nil? ? "NO" : (params[:is_installed][:val].nil? ? "ALL" : params[:is_installed][:val])
+    if ! params[:is_installed_val].nil?
+      @_ins = params[:is_installed_val]
+    else
+      @_ins = params[:is_installed].nil? ? "NO" : (params[:is_installed][:val].nil? ? "ALL" : params[:is_installed][:val])
+    end
     cust_qry_array = ["select distinct cust_id from cust_infs where delete_flag = 0"]
     cust_qry_array << "upper(cname) like '#{@_nm.to_s.upcase}%'" if ! @_nm.blank?
-    cust_qry = cust_qry_array.join(" and ") + " order by cname "
+    cust_qry = cust_qry_array.join(" and ")
     
     qry_array = ["select * from install_books where delete_flag = 0 and cust_id in (#{cust_qry})"]
     qry_array << "upper(slip_trans_id) like '#{@_slp.to_s.upcase}%'" if ! @_slp.blank?
@@ -37,8 +43,11 @@ class InstallBooksController < ApplicationController
     qry_array << "rcv_pin like '#{@_rcvpin}%'" if ! @_rcvpin.blank?
     qry_array << "NOT installed" if @_ins == "NO"
     qry_array << "installed" if @_ins == "YES"
-    qry = qry_array.join(" and ") + " order by installed, slip_trans_id"
+    qry = qry_array.join(" and ") + " order by cust_id desc "
+    count_qry = qry.gsub("select *","select count(*)")
     @install_books = InstallBook.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
+    #@install_books = InstallBook.find_by_sql(qry)
+    @tot_rec = InstallBook.count_by_sql(count_qry)
     render :action => "index"
     #render :text => qry_array
   end
@@ -97,7 +106,7 @@ class InstallBooksController < ApplicationController
     @install_book.rcv_pin = params[:install_book][:rcv_pin]
     @install_book.remarks = params[:install_book][:remarks]
     if params[:install_book][:smartcardno].nil? || params[:install_book][:smartcardno].blank? || params[:install_book][:rcv_no].nil? || params[:install_book][:rcv_no].blank? || params[:install_book][:rcv_pin].nil? || params[:install_book][:rcv_pin].blank?
-      flash[:notice] = "#ERROR#Neither of the Smartcard No, RCV Pin, RCV No can be blank"
+      flash[:notice] = "#ERROR#Neither of the Smart Card NO, RCV NO, RCV PIN can be blank"
       render :action => "edit"
     else
       if @install_book.update_attributes(params[:install_book])

@@ -1,0 +1,60 @@
+%tr{:style => "font-weight:bold;background-color: blue;color:white;", :class => "report_border"}
+  %td ID
+  %td Cust Name
+  %td Contact#
+  %td Alt Cont#
+  %td Address
+  %td State
+  %td City
+  %td Slip/Trans ID
+  %td Reg. Date
+  %td GSK NO
+  %td GSK PIN
+  %td SmartCardNo
+  %td RCV NO
+  %td RCV PIN
+  %td Installed
+  %td Remarks
+- if ! @rec[0].nil?
+  - @rec.each do |rec|
+    %tr.datarow{:class => cycle('list_line_odd_report','list_line_even_report')}
+      %td
+        = rec.cust_id
+      %td
+        = rec.cname
+      %td
+        = rec.contact_no
+      %td
+        = (rec.alt_con_no.nil? || rec.alt_con_no.blank?) ?  "N/A" : rec.alt_con_no
+      %td{:width => "250px"}
+        = rec.address
+      %td
+        = rec.state
+      %td
+        = rec.city
+      %td{:style => "white-space: nowrap;"}
+        = rec.slip_no||rec.trans_id
+      %td{:style => "white-space: nowrap;"}
+        = rec.date_of_reg.strftime('%d-%b-%y')
+      %td
+        = rec.gsk_no || "N/A"
+      %td
+        = rec.gsk_pin || "N/A"
+      %td
+        = rec.smartcardno || "N/A"
+      %td
+        = rec.rcv_no || "N/A"
+      %td
+        = rec.rcv_pin || "N/A"
+      %td
+        = rec.installed? ? "YES" : "NO"
+      %td
+        = (rec.remarks.nil? || rec.remarks.blank?) ?  "N/A" : rec.remarks
+- elsif ! flash[:notice].nil?
+  %tr
+    %td{:colspan => 16, :align => "center", :style => "color:red;background-color:#CCFFFF"} 
+      %b Start Date Can Not Be Greater Than End Date !!!
+-else
+  %tr
+    %td{:colspan => 16, :align => "center", :style => "color:black;background-color:#CCFFFF"} 
+      %b No Record Found !!!
