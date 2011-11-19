@@ -2,6 +2,9 @@
   = render "shared/flash_messages"
   .paginate_ss
     = will_paginate :params => {:cont=>@_cont,:nm=>@_nm,:add=>@_add,:st=>@_st,:is_installed_val=>@_ins}
+    .num_recs{:style => "color:green"} 
+      %b
+        = "Total Records Found: #{@tot_rec}"
   = render 'sort_filter_cust_form'
   .row_hover
     %table{:border => 0}

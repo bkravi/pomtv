@@ -1,5 +1,8 @@
--#.paginate_ss
-  -#= will_paginate
+.paginate_ss
+  = will_paginate :params => {:st_dt_val => @_st_dt, :end_dt_val => @_end_dt, :ins_val => @_ins}
+  .num_recs{:style => "color:green"} 
+    %b
+      = "Total Records Found: #{@tot_rec}"
 %br
 = form_tag daterange_report_path do
   %table
@@ -32,10 +35,10 @@
             = hidden_field_tag :qry, :val, :value => @final_query, :size => 1
             = hidden_field_tag :hidden_st, :val, :value => @_st_dt, :size => 1
             = hidden_field_tag :hidden_end, :val, :value => @_end_dt, :size => 1
-            = submit_tag ' Save ', :title => "Save as Excel file"
+            = submit_tag ' Export To Excel ', :title => "Save as Excel file"
         - else
-          = button_to(' Save ', {}, :disabled => true)
+          = button_to(' Export To Excel ', {}, :disabled => true)
   = render 'report'
 %br
--#.paginate_ss
-  -#= will_paginate
+.paginate_ss
+  = will_paginate :params => {:st_dt_val => @_st_dt, :end_dt_val => @_end_dt, :ins_val => @_ins}

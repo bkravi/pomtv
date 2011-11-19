@@ -1,5 +1,8 @@
--#.paginate_ss
-  -#= will_paginate
+.paginate_ss
+  = will_paginate
+  .num_recs{:style => "color:green"} 
+    %b
+      = "Total Records Found: #{@tot_rec}"
 %br
 %table{:border => 0, :cellspacing => 0}
   %tr
@@ -8,9 +11,9 @@
       .flt_rt{:style => "float:right"}
         - if ! @install_book[0].nil?
           = form_tag save_reliance_path,:controller => "utilities", :method => 'post' do
-            = submit_tag ' Save ', :title => "Save as Excel file"
+            = submit_tag ' Export To Excel ', :title => "Save as Excel file"
         - else
-          = button_to(' Save ', {}, :disabled => true)
+          = button_to(' Export To Excel ', {}, :disabled => true)
   %tr{:style => "font-weight:bold;background-color: blue;color:white;", :class => "report_border"}
     %td Slip/Trans ID
     %td GSK NO
@@ -47,5 +50,5 @@
       %td{:colspan => 9, :align => "center", :style => "color:black;background-color:#CCFFFF"} 
         %b No Record Found !!!
 %br
--#.paginate_ss
-  -#= will_paginate
+.paginate_ss
+  = will_paginate

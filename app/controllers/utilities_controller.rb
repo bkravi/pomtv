@@ -3,8 +3,9 @@ class UtilitiesController < ApplicationController
   before_filter :login_required
 
   def send_to_reliance
-    #@utilities = @install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
-    @utilities = @install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"])
+    @utilities = @install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
+    @tot_rec = InstallBook.count(:conditions => ["delete_flag = 0 and NOT installed"])
+    #@utilities = @install_book = InstallBook.find(:all, :order => "slip_trans_id", :conditions => ["delete_flag = 0 and NOT installed"])
     render :layout => "reportlayout"
   end
 
@@ -26,15 +27,25 @@ class UtilitiesController < ApplicationController
 
   def monthly_report
     qry = "select * from install_books RIGHT OUTER JOIN cust_infs ON(cust_infs.cust_id=install_books.cust_id) where cust_infs.delete_flag=0 and (install_books.delete_flag=0 OR install_books.delete_flag is NULL)"
-    @_mon = params[:mon].nil? ? "#{Time.now.strftime('%B')}" : (params[:mon][:val].nil? ? "#{Time.now.strftime('%B')}" : params[:mon][:val])
-    @_ins = params[:ins].nil? ? "NO" : (params[:ins][:val].nil? ? "NO" : params[:ins][:val])
+    if ! params[:mon_val].nil?
+      @_mon = params[:mon_val]
+    else
+      @_mon = params[:mon].nil? ? "#{Time.now.strftime('%B')}" : (params[:mon][:val].nil? ? "#{Time.now.strftime('%B')}" : params[:mon][:val])
+    end
+    if ! params[:ins_val].nil?
+      @_ins = params[:ins_val]
+    else
+      @_ins = params[:ins].nil? ? "NO" : (params[:ins][:val].nil? ? "NO" : params[:ins][:val])
+    end
     qry << " and cust_infs.installed " if @_ins == "YES"
     qry << " and not cust_infs.installed " if @_ins == "NO"
     qry << " and EXTRACT(MONTH from date_of_reg) = #{month_no_of(@_mon)} "
     qry += " order by date_of_reg "
+    count_qry = qry.gsub("select *","select count(*)")
     @final_query = qry
-    #@utilities = @rec = CustInf.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
-    @utilities = @rec = CustInf.find_by_sql(qry)
+    @utilities = @rec = CustInf.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
+    @tot_rec = CustInf.count_by_sql(count_qry)
+    #@utilities = @rec = CustInf.find_by_sql(qry)
     render :layout => "reportlayout"
     #render :text => qry
   end
@@ -42,16 +53,30 @@ class UtilitiesController < ApplicationController
   def daterange_report
     flash[:notice] = nil
     qry = "select * from install_books RIGHT OUTER JOIN cust_infs ON(cust_infs.cust_id=install_books.cust_id) where cust_infs.delete_flag=0 and (install_books.delete_flag=0 OR install_books.delete_flag is NULL)"
-    @_st_dt = (params[:st_dt].nil? || params[:st_dt].blank?) ? (Time.now-5*24*60*60).strftime('%Y/%m/%d') : params[:st_dt]
-    @_end_dt = (params[:end_dt].nil? || params[:end_dt].blank?) ? Time.now.strftime('%Y/%m/%d') : params[:end_dt]
-    @_ins = params[:ins].nil? ? "NO" : (params[:ins][:val].nil? ? "NO" : params[:ins][:val])
+    if ! params[:st_dt_val].nil?
+      @_st_dt = params[:st_dt_val]
+    else
+      @_st_dt = (params[:st_dt].nil? || params[:st_dt].blank?) ? (Time.now-5*24*60*60).strftime('%Y/%m/%d') : params[:st_dt]
+    end
+    if ! params[:end_dt_val].nil?
+      @_end_dt = params[:end_dt_val]
+    else
+      @_end_dt = (params[:end_dt].nil? || params[:end_dt].blank?) ? Time.now.strftime('%Y/%m/%d') : params[:end_dt]
+    end
+    if ! params[:ins_val].nil?
+      @_ins = params[:ins_val]
+    else
+      @_ins = params[:ins].nil? ? "NO" : (params[:ins][:val].nil? ? "NO" : params[:ins][:val])
+    end
     qry << " and date_of_reg between '#{@_st_dt}' and '#{@_end_dt}' "
     qry << " and cust_infs.installed " if @_ins == "YES"
     qry << " and not cust_infs.installed " if @_ins == "NO"
     qry += " order by date_of_reg "
+    count_qry = qry.gsub("select *","select count(*)")
     @final_query = qry
-    #@utilities = @rec = CustInf.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
-    @utilities = @rec = CustInf.find_by_sql(qry)
+    @utilities = @rec = CustInf.find_by_sql(qry).paginate(:page => params[:page], :per_page => 100)
+    @tot_rec = CustInf.count_by_sql(count_qry)
+    #@utilities = @rec = CustInf.find_by_sql(qry)
     ## Check the validity of start/end dates
     if @_st_dt > @_end_dt
       flash[:notice] = "Start > End"
