@@ -49,6 +49,41 @@ class InstallBooksController < ApplicationController
     #render :text => qry_array
   end
 
+  def edit_booking_fields
+    flash[:notice] = nil
+    @install_book = InstallBook.find(params[:edit_id])
+  end
+
+  def update_new_gsk
+    @_nm = '' ; @_slp = '' ; @_gskno = '' ; @_gskpin = '' ; @_scn = '' ; @_rcvno = '' ; @_rcvpin = '' ; @_ins = "NO"
+    new_gsk_no = params[:install_book][:gsk_no]
+    new_gsk_pin = params[:install_book][:gsk_pin]
+    new_rcv_no = params[:install_book][:rcv_no]
+    new_rcv_pin = params[:install_book][:rcv_pin]
+    new_smartcardno = params[:install_book][:smartcardno]
+    new_remarks = params[:install_book][:remarks]
+    if params[:update]
+      #render :text => params[:install_book_id];return
+      @temp_install_book = InstallBook.find(:first, :conditions => ["id = ?",params[:install_book_id]])
+      @temp_cust_inf = CustInf.find(:first, :conditions => ["id = ?", @temp_install_book.cust_id])
+      if @temp_install_book.nil? or @temp_cust_inf.nil?
+        flash[:notice] = "#ERROR#Error in update!! Tables are not in sync !!"
+      else
+        @temp_install_book.gsk_no = new_gsk_no
+        @temp_install_book.gsk_pin = new_gsk_pin
+        if ! @temp_install_book.save
+          @install_book = @temp_install_book
+          render :action => "edit_booking_fields"
+          return
+        else
+          flash[:notice] = "Workorder For Customer '#{@temp_cust_inf.cname}' Has Been Succefully Updated"
+        end
+      end
+    end
+    @install_books = InstallBook.find(:all, :order => "cust_id desc", :conditions => ["delete_flag = 0 and NOT installed"]).paginate(:page => params[:page], :per_page => 100)
+    render :action => "index"
+  end
+
   # GET /install_books/1
   def show
     @install_book = InstallBook.find(params[:id])
@@ -56,8 +91,14 @@ class InstallBooksController < ApplicationController
 
   # GET /install_books/new
   def new
+    @redirect_from_cust_infs_controller = !params[:cust_id_for_wo].nil? == true ? true : false 
     @install_book = InstallBook.new
-    @booking_for = _fill_bookingfor_list
+    if @redirect_from_cust_infs_controller
+      cust_list = CustInf.find(:first, :conditions => ["cust_id = ?", params[:cust_id_for_wo]])
+      @booking_for = ["#{(cust_list.trans_id||cust_list.slip_no) + '=>' + cust_list.cust_id.to_s + '=>' + cust_list.cname + '=>' + cust_list.contact_no.to_s + '=>' + cust_list.city}"]
+    else
+      @booking_for = _fill_bookingfor_list
+    end
   end
 
   # GET /install_books/1/edit
@@ -67,6 +108,10 @@ class InstallBooksController < ApplicationController
 
   # POST /install_books
   def create
+    if params[:cancel_and_back_to_cust]
+      redirect_to new_cust_inf_path
+      return
+    end
     @install_book = InstallBook.new(params[:install_book])
     @booking_for = _fill_bookingfor_list
     if params[:booking_for_cust][:cust] == "----Please select the customer----"
@@ -86,11 +131,21 @@ class InstallBooksController < ApplicationController
         flash[:notice] = 'Workorder successfully created'
         if params[:save]
           redirect_to install_books_path
+        elsif params[:save_and_back_to_cust]
+          redirect_to new_cust_inf_path
         else
           redirect_to new_install_book_path
         end
       else
-        render :action => "new"
+        if params[:save_and_back_to_cust]
+          params[:cust_id_for_wo] = booking_custid
+          @redirect_from_cust_infs_controller = true
+          cust_list = CustInf.find(:first, :conditions => ["cust_id = ?", params[:cust_id_for_wo]])
+          @booking_for = ["#{(cust_list.trans_id||cust_list.slip_no) + '=>' + cust_list.cust_id.to_s + '=>' + cust_list.cname + '=>' + cust_list.contact_no.to_s + '=>' + cust_list.city}"]
+          render :action => "new"
+        else
+          render :action => "new"
+        end
       end
     end
   end

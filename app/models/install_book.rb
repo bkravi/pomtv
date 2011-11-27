@@ -14,11 +14,17 @@ class InstallBook < ActiveRecord::Base
   end
 
   def validate
-    errors.add_to_base("RCV NO is not a number") if (rcv_no.to_i == 0 && !rcv_no.blank?)
-    errors.add_to_base("RCV PIN is not a number") if (rcv_pin.to_i == 0 && !rcv_pin.blank?)
-    errors.add_to_base("Smart Card# is not a number") if (smartcardno.to_i == 0 && !smartcardno.blank?)
+    if !rcv_no.blank?
+      errors.add_to_base("RCV NO must be a 12 digit number") if (rcv_no.length != 12 or rcv_no.to_i.to_s.length != 12)
+    end
+    if !rcv_pin.blank?
+      errors.add_to_base("RCV PIN must be a 12 digit number") if (rcv_pin.length != 12 or rcv_pin.to_i.to_s.length != 12)
+    end
+    if !smartcardno.blank?
+      errors.add_to_base("Smart Card# must be a 12 digit number") if (smartcardno.length != 12 or smartcardno.to_i.to_s.length != 12)
+    end
+    errors.add_to_base("GSK NO must be a 14 digit number") if (gsk_no.length != 14 or gsk_no.to_i.to_s.length != 14)
+    errors.add_to_base("GSK PIN must be a 4 digit number") if (gsk_pin.length != 4 or gsk_pin.to_i.to_s.length != 4)
   end
 
-  validates :gsk_no, :presence => true, :length => 1..18, :numericality => true
-  validates :gsk_pin, :presence => true, :length => 1..18, :numericality => true
 end

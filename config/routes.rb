@@ -8,7 +8,10 @@ Pomtv::Application.routes.draw do
 
   match 'install_books/show_sorted_install' => 'install_books#show_sorted_install', :as => :show_sorted_install
   match 'cust_infs/show_sorted' => 'cust_infs#show_sorted', :as => :show_sorted
-
+  
+  match 'install_books/edit_booking_fields' => 'install_books#edit_booking_fields', :as => :edit_booking_fields
+  match 'install_books/update_new_gsk' => 'install_books#update_new_gsk', :as => 'update_new_gsk'
+  
   resources :install_books
   resources :cust_infs
 

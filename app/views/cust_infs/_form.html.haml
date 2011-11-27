@@ -80,6 +80,9 @@
             = f.text_field :pincode, :class => 'text_feld_area_small'
           %td{:colspan => 2} 
         %tr
+          %td{:colspan => 4}
+            %br
+        %tr
           - if @controller.action_name == 'edit' || @controller.action_name == 'update'
             %td{:colspan => 2, :align => "right"}
               = f.submit ' Update ', :disable_with => ' Update ', :title => "Update and go back to main page"
@@ -90,5 +93,7 @@
               = f.submit ' Save and Exit ', :disable_with => ' Save and Exit ', :name => "save", :title => "Save and go back to main page"
               &nbsp;
               = f.submit ' Save and Continue ', :disable_with => ' Save and Continue ', :name => "cont", :title => "Save and continue to register another customer"
+              &nbsp;
+              = f.submit ' Save and Generate Workorder ', :disable_with => ' Save and Generate Workorder ', :name => "genwrkord", :title => "Save and generate 'wordorder' for this customer"
             %td{:colspan => "1",:align=>"left"}
               = link_to button_to(' Cancel '),cust_infs_path, :method => "get", :title => "Cancel registering customer"

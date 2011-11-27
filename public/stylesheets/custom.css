@@ -106,6 +106,7 @@ ul.navigation li {
 .write_area{background-color:#D3DAED;border:black 1px solid;}
 .bold{font-weight:bold;font-family: Arial, sans-serif;}
 .mid_bg_add{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 250px;width: 800px;}
+.mid_bg_gsk{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 275px;width: 750px;}
 .mid_bg_add_bigger{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left: 5px;width: "100%";}
 .mid_bg_add_booking{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:20px;width: "100%";}
 .mid_bg_add_utilities{background:url(../images/contnt_mid_img.png) left top repeat-x; border:#AFB0B0 1px solid; margin-left:150px;width: "100%";}*/

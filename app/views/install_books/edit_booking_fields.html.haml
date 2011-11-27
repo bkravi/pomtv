@@ -1,0 +1,73 @@
+%div{:class=>"mid_bg_gsk"}
+  = form_for @install_book, :url => {:action => 'update_new_gsk', :install_book_id => @install_book.id} do |f|
+    = render "shared/flash_messages"
+    = render "shared/error_messages", :target => @install_book
+    %table{:cellpadding=>"3", :cellspacing=>"3", :style => "margin-left:10px;margin-top:10px"}
+      %tbody{:class => 'bold'}
+        %tr
+          %td{:colspan => 4}
+            %h1 Edit Workorder
+            %br
+        %tr
+          %td
+            = f.label :cust_id, 'Customer ID'
+          %td
+            = text_field_tag :cid, @install_book.cust_id, :class => 'text_feld_area_small', :disabled => true
+          %td
+            = f.label :cust_name, 'Cust Name'
+          %td
+            = text_field_tag :cname, @install_book.cust_inf.cname, :class => 'text_feld_area', :disabled => true
+        %tr
+          %td
+            = f.label :contact, 'Contact No'
+          %td
+            = text_field_tag :cont, @install_book.cust_inf.contact_no, :class => 'text_feld_area_small', :disabled => true
+          %td
+            = f.label :slip_trans_id, 'Slip/Trans No'
+          %td
+            = f.text_field :slip_trans_id, :class => 'text_feld_area', :disabled => true
+        %tr
+          %td{:colspan => 4, :align => "center"}
+            %hr{:style => "height:4px;background-color:#D6D9BA"}
+        %tr
+          %td
+            = f.label :gsk_no, 'GSK No'
+          %td
+            = f.text_field :gsk_no, :class => 'text_feld_area', :title => "Give new GSK No"
+          %td
+            = f.label :gsk_pin, 'GSK Pin'
+          %td
+            = f.text_field :gsk_pin, :class => 'text_feld_area', :title => "Give new GSK Pin"
+        %tr
+          %td{:colspan => 4, :align => "center"}
+            %hr{:style => "height:4px;background-color:#D6D9BA"}
+        - if(@install_book.rcv_no.blank? or @install_book.rcv_no.nil?)
+          %tr
+            %td{:colspan => 4, :style => "color:red", :align => "center"}
+              %b You Can't Update Below RCV Values As Customer Is Not Assigned Any RCV Pin Yet !
+        %tr
+          %td
+            = f.label :rcv_no, 'RCV No'
+          %td
+            = f.text_field :rcv_no, :class => 'text_feld_area', :value => ((@install_book.rcv_no.blank? or @install_book.rcv_no.nil?) ? "N/A" : @install_book.rcv_no),:title => ((@install_book.rcv_no.blank? or @install_book.rcv_no.nil?) ? "Editing not allowed here as customer is not assigned any RCV No yet" : "Give new RCV No"), :disabled => (@install_book.rcv_no.blank? or @install_book.rcv_no.nil?)
+          %td
+            = f.label :rcv_pin, 'RCV Pin'
+          %td
+            = f.text_field :rcv_pin, :class => 'text_feld_area', :value => ((@install_book.rcv_pin.blank? or @install_book.rcv_pin.nil?) ? "N/A" : @install_book.rcv_pin), :title => ((@install_book.rcv_pin.blank? or @install_book.rcv_pin.nil?) ? "Editing not allowed here as customer is not assigned any RCV Pin yet" : "Give new RCV PIN"), :disabled => (@install_book.rcv_pin.blank? or @install_book.rcv_pin.nil?)
+        %tr
+          %td
+            = f.label :smartcardno, 'Smart Card No'
+          %td
+            = f.text_field :smartcardno, :class => 'text_feld_area', :value => ((@install_book.smartcardno.blank? or @install_book.smartcardno.nil?) ? "N/A" : @install_book.smartcardno), :title => ((@install_book.smartcardno.blank? or @install_book.smartcardno.nil?) ? "Editing not allowed here as customer is not assigned any Smart Card No yet" : "Give new Smart Card No"), :disabled => (@install_book.smartcardno.blank? or @install_book.smartcardno.nil?)
+          %td
+            = f.label :remarks, 'Remarks'
+          %td
+            = f.text_area :remarks, :size=> "26x2", :class => 'write_area', :value => ((@install_book.smartcardno.blank? or @install_book.smartcardno.nil?) ? "N/A" : @install_book.remarks), :title => ((@install_book.smartcardno.blank? or @install_book.smartcardno.nil?) ? "Editing not allowed here as customer is not assigned any Smart Card No yet" : "Give new Remarks"), :disabled => (@install_book.smartcardno.blank? or @install_book.smartcardno.nil?)
+        %tr
+          %td{:colspan => 4, :align => "center"}
+            %hr{:style => "height:4px;background-color:#D6D9BA"}
+        %tr
+          %td{:colspan => 4, :align => "center"}
+            = submit_tag ' Update ', :disable_with => ' Update ', :name => "update"
+            &nbsp;
+            = submit_tag ' Cancel ', :disable_with => ' Cancel ', :name => "cancel"

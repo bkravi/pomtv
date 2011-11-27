@@ -112,6 +112,11 @@ class CustInfsController < ApplicationController
         flash[:notice] = 'Customer was successfully created'
         if params[:save]
           redirect_to cust_infs_path
+        elsif params[:genwrkord]
+          flash[:notice] = 'Customer was successfully created. Now generating Workorder...'
+          @install_book = InstallBook.new
+          @booking_for = "#{(@cust_inf.trans_id||@cust_inf.slip_no) + '=>' + @cust_inf.cust_id.to_s + '=>' + @cust_inf.cname + '=>' + @cust_inf.contact_no.to_s + '=>' + @cust_inf.city}"
+          redirect_to new_install_book_path(:cust_id_for_wo => @cust_inf.id)
         else
           redirect_to new_cust_inf_path
         end

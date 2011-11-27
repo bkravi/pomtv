@@ -28,7 +28,8 @@
       - if ! @install_books[0].nil?
         - @install_books.each do |install_book|
           %tr.datarow{:class => cycle('list_line_odd','list_line_even')}
-            %td= install_book.cust_id
+            %td
+              = link_to install_book.cust_id, edit_booking_fields_path(:edit_id => install_book.id), :title => "Edit workorder details for this customer"
             %td{:style => "white-space: nowrap;"}
               = install_book.cust_inf.cname
             %td{:style => "white-space: nowrap;"}
